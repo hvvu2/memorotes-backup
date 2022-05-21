@@ -1,2 +1,10 @@
-import "./reset.css";
-import "./style.scss";
+import React from 'react';
+import HomePage from './routes/HomePage.js';
+
+function App() {
+    return (
+        <HomePage />
+    );
+}
+
+export default App;
