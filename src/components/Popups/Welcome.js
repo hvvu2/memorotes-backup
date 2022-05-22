@@ -19,7 +19,7 @@ function Welcome(props) {
                             Enjoy creating your own memorotes!
                         </p>
                     </div>
-                    <p className='popup__hint'><span className='highlight'>Hint:</span> Click the dog-ear to close ➙</p>
+                    <p className='popup__hint'><span className='highlight'>Hint:</span> Click the dog-ear to close/delete ➙</p>
                     <button className='popup__close' onClick={() => dispatch(hideWelcome())}></button>
                 </div>
             </div>

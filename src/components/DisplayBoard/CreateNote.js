@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { showAlert } from '../../features/popupSlice.js'
 import { hideCreateUI, onCreate } from '../../features/noteSlice.js';
+import Context from './Context.js';
+
+function SaveBtn(props) {
+    if (props.toggle) {
+        return <button className='note__submit' type='submit'><i className='bx bxs-check-circle'></i></button>;
+    }
+}
 
 function CreateNote(props) {
     const dispatch = useDispatch();
     const date = useSelector((state) => state.note.date);
     const uid = useSelector((state) => state.note.uid);
     const serverTimestamp = useSelector((state) => state.note.serverTimestamp);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+    const value = useContext(Context);
+    const [title, setTitle] = [value.title, value.setTitle];
+    const [content, setContent] = [value.content, value.setContent];
+    const [saveBtn, setSaveBtn] = [value.saveBtn, value.setSaveBtn];
 
-    function onSubmit(e) {
+    useEffect(() => {
+        if (title.trim() || content.trim()) {
+            setSaveBtn(true);
+        }
+    })
+
+    function onSave(e) {
         e.preventDefault();
 
-        if (title && content) {
+        if (title.trim() || content.trim()) {
             const note = {
                 date: date,
                 uid: uid,
@@ -38,11 +53,11 @@ function CreateNote(props) {
     if (props.toggle) {
         return (
             <div className='mask dim'>
-                <form className='note' onSubmit={onSubmit}>
+                <form className='note' onSubmit={(e) => onSave(e)}>
                     <h1 className='note__date'>{date}</h1>
                     <input className='note__title' type='text' maxLength={35} placeholder='Title' onChange={(e) => setTitle(e.target.value)} />
                     <textarea className='note__txt' row='17' wrap='hard' placeholder='Type something here...' onChange={(e) => setContent(e.target.value)} />
-                    <button className='note__submit' type='submit'><i className='bx bxs-check-circle'></i></button>
+                    <SaveBtn toggle={saveBtn} />
                     <button className='note__close' type='button' onClick={(onClose)} />
                 </form>
             </div>

@@ -21,9 +21,7 @@ const initialState = {
     createBtn: true,
     createToggle: false,
     readToggle: false,
-    updateBtn: true,
     updateToggle: false,
-    deleteBtn: true,
     deleteToggle: false
 };
 
@@ -59,7 +57,6 @@ export const note = createSlice({
         },
         showUpdateUI: (state) => {
             state.status = 'Updating';
-            state.updateBtn = false;
             state.updateToggle = true;
         },
         onUpdate: (state, action) => {
@@ -77,7 +74,6 @@ export const note = createSlice({
         },
         hideUpdateUI: (state) => {
             state.status = 'onCall';
-            state.updateBtn = true;
             state.updateToggle = false;
         },
         showDeleteUI: (state) => {

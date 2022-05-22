@@ -16,8 +16,8 @@ function DeleteNote(props) {
             <div className='mask'>
                 <div className='popup s'>
                     <h1 className='popup__title'>Delete this note?</h1>
-                    <p className='popup__txt'>Everything will be gone forever.</p>
-                    <button className='popup__btn' onClick={onRemove}>Confirm</button>
+                    <p className='popup__txt'>This note will be <span className='highlight'>GONE</span> forever.</p>
+                    <button className='popup__btn delete' onClick={onRemove}>Delete</button>
                     <button className='popup__close' onClick={() => dispatch(hideDeleteUI())}></button>
                 </div>
             </div>

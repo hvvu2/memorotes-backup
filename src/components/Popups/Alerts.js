@@ -38,7 +38,7 @@ function DiscardUpdating() {
     return (
         <div className='mask'>
             <div className='popup s'>
-                <h1 className='popup__title'>Discard edits?</h1>
+                <h1 className='popup__title'>Discard the edits?</h1>
                 <div className='popup__wrapper'>
                     <p className='popup__txt'>
                         The changes you've made will be lost.

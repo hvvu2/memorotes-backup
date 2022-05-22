@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { hideReadUI, showUpdateUI, showDeleteUI } from '../../features/noteSlice.js';
+import Context from './Context.js';
 
 function UpdateBtn() {
     const dispatch =useDispatch();
+    const value = useContext(Context);
+
+    function onOpen() {
+        dispatch(showUpdateUI());
+        value.setTitle('');
+        value.setContent('');
+        value.setSaveBtn(false);
+    }
 
     return (
-        <button className='note__edit' onClick={() => dispatch(showUpdateUI())}>
+        <button className='note__edit' onClick={onOpen}>
             <i className='bx bxs-pencil'></i>
         </button>
     );
