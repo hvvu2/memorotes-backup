@@ -21,6 +21,8 @@ function UpdateNote(props) {
     useEffect(() => {
         if (title.trim() || content.trim()) {
             setSaveBtn(true);
+        } else {
+            setSaveBtn(false);
         }
     })
 

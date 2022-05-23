@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
 import { showAlert } from '../../features/popupSlice.js'
 import { hideCreateUI, onCreate } from '../../features/noteSlice.js';
 import Context from './Context.js';
@@ -23,6 +24,8 @@ function CreateNote(props) {
     useEffect(() => {
         if (title.trim() || content.trim()) {
             setSaveBtn(true);
+        } else {
+            setSaveBtn(false);
         }
     })
 

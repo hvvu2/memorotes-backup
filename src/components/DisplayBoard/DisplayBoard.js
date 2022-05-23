@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { doc, collection, query, orderBy, getDocs } from "firebase/firestore";
 import { setIndex, showCreateUI, showReadUI } from '../../features/noteSlice.js';
 import Context from './Context.js';
 import CreateNote from './CreateNote.js';
