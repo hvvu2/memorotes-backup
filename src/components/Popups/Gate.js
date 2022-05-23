@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { reset, switchMethod, login } from '../../features/gateSlice.js';
 import { hideGate } from '../../features/popupSlice.js';
@@ -30,7 +30,7 @@ function Login(props) {
         if (msg) {
             setTimeout(() => {
                 setMsg('');
-            }, 2000);
+            }, 2500);
         }
     });
 
@@ -54,7 +54,6 @@ function Login(props) {
             <div className='gate'>
                 <div className='gate__wrapper'>
                     <p className='gate__txt'>Nothing is ever really lost to us as long as we remember it.</p>
-                    <button className='gate__link' type='button' onClick={() => dispatch(switchMethod())}>Not a member yet?</button>
                 </div>
                 <form className='gate__form' onSubmit={(e) => onLogin(e)}>
                     <h1 className='gate__method'>Login</h1>
@@ -65,6 +64,7 @@ function Login(props) {
                     </div>
                     <Message method={props.method} msg={msg} />
                     <button className='gate__submit' type='submit'>Login</button>
+                    <button className='gate__link' type='button' onClick={() => dispatch(switchMethod())}>Not a member yet?</button>
                 </form>
             </div>
         );
@@ -73,6 +73,7 @@ function Login(props) {
 
 function SignUp(props) {
     const dispatch = useDispatch();
+    const form = useRef(null);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
@@ -83,7 +84,7 @@ function SignUp(props) {
         if (msg) {
             setTimeout(() => {
                 setMsg('');
-            }, 2000);
+            }, 2500);
         }
     });
 
@@ -92,18 +93,19 @@ function SignUp(props) {
         if (namePattern.test(name) && emailPattern.test(email) && pwdPattern.test(pwd) && rePwd === pwd) {
             if (await registerWithEmailAndPassword(name, email, pwd)) {
                 setMsg('Welcome to Memorotes!');
+                form.current.reset();
             } else {
                 setMsg('Uh-oh! This e-mail has been registered.');
             }
         } else {
-            setMsg('Oops... Please check the fields again.');
+            setMsg('Oops... Please check if the fields are filled correctly.');
         }
     }
 
     if (props.method == 'SignUp') {
         return (
             <div className='gate'>
-                <form className='gate__form r' onSubmit={(e) => onSignUp(e)}>
+                <form className='gate__form r' ref={form} onSubmit={(e) => onSignUp(e)}>
                     <h1 className='gate__method'>Sign Up</h1>
                     <h1 className='gate__sub-title r'>Nice to meet you!</h1>
                     <div className='gate__input-wrapper r'>
@@ -113,11 +115,11 @@ function SignUp(props) {
                         <input className='gate__input' name='rePwd' type='password' placeholder='Confirm your password' onChange={(e) => setRePwd(e.target.value)} />
                     </div>
                     <Message method={props.method} msg={msg} />
-                    <button className='gate__submit' type='submit'>Sign Up</button>
+                    <button className='gate__submit r' type='submit'>Sign Up</button>
+                    <button className='gate__link r' type='button' onClick={() => dispatch(switchMethod())}>Already have an account?</button>
                 </form>
                 <div className='gate__wrapper r'>
                     <p className='gate__txt'>The moments we share are the moments we keep forever.</p>
-                    <button className='gate__link' type='button' onClick={() => dispatch(switchMethod())}>Already have an account?</button>
                 </div>
             </div>
         );

@@ -13,7 +13,7 @@ function SaveBtn(props) {
 function CreateNote(props) {
     const dispatch = useDispatch();
     const date = useSelector((state) => state.note.date);
-    const uid = useSelector((state) => state.note.uid);
+    const uid = useSelector((state) => state.gate.uid);
     const serverTimestamp = useSelector((state) => state.note.serverTimestamp);
     const value = useContext(Context);
     const [title, setTitle] = [value.title, value.setTitle];

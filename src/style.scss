@@ -276,7 +276,7 @@ i {
                 justify-content: space-around;
                 height: 100px;
 
-                &.r{
+                &.r {
                     height: 200px;
                 }
             }
@@ -291,36 +291,28 @@ i {
                 background-color: $base;
             }
 
-            &__link {
-                position: absolute;
-                bottom: 35px;
-                font-size: 18px;
-                color: $base;
-                text-decoration: underline;
-            }
-
             &__msg {
                 position: absolute;
-                bottom: 140px;
+                bottom: 150px;
                 margin-top: 20px;
                 font-size: 18px;
 
                 &.r {
-                    bottom: 90px;
+                    bottom: 100px;
                 }
 
                 &.ok {
                     color: $ok;
                 }
 
-                &.err{
+                &.err {
                     color: $err-hover;
                 }
             }
 
             &__submit {
                 position: absolute;
-                bottom: 35px;
+                bottom: 80px;
                 width: 100px;
                 height: 40px;
                 font-size: 24px;
@@ -330,6 +322,22 @@ i {
 
                 &:hover {
                     background-color: white;
+                }
+
+                &.r {
+                    bottom: 45px;
+                }
+            }
+
+            &__link {
+                position: absolute;
+                bottom: 50px;
+                font-size: 18px;
+                color: $main;
+                text-decoration: underline;
+
+                &.r {
+                    bottom: 15px;
                 }
             }
         }

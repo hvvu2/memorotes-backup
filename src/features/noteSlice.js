@@ -17,7 +17,6 @@ const initialState = {
     serverTimestamp: serverTimestamp,
     date: today,
     notes: [],
-    uid: null,
     createBtn: true,
     createToggle: false,
     readToggle: false,
