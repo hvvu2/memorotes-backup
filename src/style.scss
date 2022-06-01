@@ -63,6 +63,10 @@ i {
     color: $base;
 }
 
+.cmpl {
+    background: $sub !important;
+}
+
 .l {
     width: 600px;
     height: 400px;
@@ -81,10 +85,11 @@ i {
 
 // Main
 .home {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 50px 1fr;
     height: 100%;
     min-height: 100%;
+    position: relative;
 
     .popup {
         display: flex;
@@ -140,10 +145,10 @@ i {
 
         &__hint {
             position: absolute;
+            right: 55px;
+            bottom: 15px;
             font-size: 18px;
             color: $main;
-            right: 65px;
-            bottom: 15px;
         }
 
         &__btn {
@@ -184,6 +189,17 @@ i {
                 border-color: $corner-hover transparent transparent $corner-hover;
                 box-shadow: -3px -3px 3px $shallow-shadow;
                 transition: 0.3s;
+            }
+
+            & i {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                font-size: 20px;
+                font-weight: bold;
+                color: $base;
+                opacity: 0.5;
+                pointer-events: none;
             }
         }
 
@@ -378,6 +394,16 @@ i {
         }
     }
 
+    .side-panel {
+        position: fixed;
+        top: 50px;
+        right: 0;
+        z-index: 100;
+        width: 250px;
+        height: calc(100% - 50px);
+        background-color: $main;
+    }
+
     .display-board {
         flex-grow: 1;
         display: flex;
@@ -390,6 +416,7 @@ i {
             display: flex;
             flex-wrap: wrap;
             padding: 20px;
+            height: 100%;
         }
 
         &__icon {
@@ -461,6 +488,7 @@ i {
                 font-size: 18px;
                 white-space: pre-wrap;
                 background: transparent;
+                overflow: hidden;
 
                 &::placeholder {
                     color: $sub-txt;
@@ -515,6 +543,23 @@ i {
                     box-shadow: -3px -3px 3px $shallow-shadow;
                     transition: 0.3s;
                 }
+
+                & i {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: $main;
+                    opacity: 0.75;
+                    pointer-events: none;
+                }
+            }
+
+            &__delete i {
+                right: 2px;
+                bottom: 2px;
+                font-size: 14px;
             }
         }
     }

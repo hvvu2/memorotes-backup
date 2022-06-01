@@ -97,6 +97,8 @@ function SignUp(props) {
             } else {
                 setMsg('Uh-oh! This e-mail has been registered.');
             }
+        } else if (rePwd != pwd) {
+            setMsg('Oh... The confirm password does not match.');
         } else {
             setMsg('Oops... Please check if the fields are filled correctly.');
         }
@@ -141,7 +143,7 @@ function Gate(props) {
                 <div className='popup l'>
                     <Login method={method} />
                     <SignUp method={method} />
-                    <button className='popup__close' onClick={onClose}></button>
+                    <button className='popup__close' onClick={onClose}><i className='bx bx-x'></i></button>
                 </div>
             </div>
         );

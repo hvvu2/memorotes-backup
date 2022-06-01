@@ -7,11 +7,8 @@ import {
 } from "firebase/auth";
 import {
     getFirestore,
-    query,
-    getDocs,
-    collection,
-    where, 
-    addDoc
+    doc,
+    setDoc
 } from 'firebase/firestore';
 
 // Firebase Init
@@ -34,10 +31,9 @@ const registerWithEmailAndPassword = async (name, email, pwd) => {
     try {
         const result = await createUserWithEmailAndPassword(auth, email, pwd);
         const user = result.user;
-        await addDoc(collection(db, 'users'), {
+        await setDoc(doc(db, 'users', user.uid), {
             uid: user.uid,
             name: name,
-            authoProvider: 'local',
             email: email
         });
         return true;
@@ -63,6 +59,7 @@ const logOut = () => {
 
 export {
     auth,
+    db,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,
     logOut

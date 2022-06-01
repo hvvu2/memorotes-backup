@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../firebase.js';
 import { showGate } from '../../features/popupSlice.js';
 import { logout } from '../../features/gateSlice.js';
-import { logOut } from '../../firebase.js';
+import { showPanel, hidePanel } from '../../features/panelSlice.js';
 
 function GateBtn(props) {
     const dispatch = useDispatch();
@@ -27,8 +28,18 @@ function LogOutBtn(props) {
 }
 
 function Navbar() {
+    const dispatch = useDispatch();
     const gateBtn = useSelector((state) => state.gate.gateBtn);
     const logOutBtn = useSelector((state) => state.gate.logOutBtn);
+    const panelToggle = useSelector((state) => state.panel.panelToggle);
+
+    function onOpen() {
+        if (panelToggle) {
+            dispatch(hidePanel());
+        } else {
+            dispatch(showPanel());
+        }
+    }
 
     return (
         <nav className='navbar'>
@@ -36,7 +47,7 @@ function Navbar() {
             <div className='navbar__wrapper'>
                 <GateBtn toggle={gateBtn} />
                 <LogOutBtn toggle={logOutBtn} />
-                <button className='navbar__btn'><i className='bx bxs-palette'></i></button>
+                <button className='navbar__btn' onClick={onOpen}><i className='bx bxs-palette'></i></button>
             </div>
         </nav>
     );

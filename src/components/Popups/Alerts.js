@@ -21,7 +21,7 @@ function DiscardCreating() {
                     </p>
                 </div>
                 <button className='popup__btn' onClick={onDiscard}>Confirm</button>
-                <button className='popup__close' onClick={() => dispatch(hideAlert())} />
+                <button className='popup__close' onClick={() => dispatch(hideAlert())}><i className='bx bx-x'></i></button>
             </div>
         </div>
     );
@@ -57,9 +57,9 @@ function Alerts(props) {
     if (props.toggle) {
         if (props.type == 'Discard') {
             if (noteStatus == 'Creating') {
-                return <DiscardCreating />
+                return <DiscardCreating />;
             } else if (noteStatus == 'Updating') {
-                return <DiscardUpdating />
+                return <DiscardUpdating />;
             }
         }
     }

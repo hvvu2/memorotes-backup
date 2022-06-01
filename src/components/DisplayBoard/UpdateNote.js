@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { showAlert } from '../../features/popupSlice.js';
-import { onUpdate, hideUpdateUI } from '../../features/noteSlice.js';
+import { onUpdate, hideUpdateUI, updateNote } from '../../features/noteSlice.js';
 import Context from './Context.js';
 
 function SaveBtn(props) {
@@ -12,11 +12,13 @@ function SaveBtn(props) {
 
 function UpdateNote(props) {
     const dispatch = useDispatch();
-    const note = props.note;
     const value = useContext(Context);
     const [title, setTitle] = [value.title, value.setTitle];
     const [content, setContent] = [value.content, value.setContent];
     const [saveBtn, setSaveBtn] = [value.saveBtn, value.setSaveBtn];
+    const isLogged = value.isLogged;
+    const uid = value.uid;
+    const note = value.note;
 
     useEffect(() => {
         if (title.trim() || content.trim()) {
@@ -34,8 +36,14 @@ function UpdateNote(props) {
                 title: title,
                 content: content
             }
-            dispatch(onUpdate(newNote));
-            dispatch(hideUpdateUI());
+
+            if (isLogged) {
+                dispatch(updateNote({uid, note, newNote}));
+                dispatch(hideUpdateUI());
+            } else {
+                dispatch(onUpdate(newNote));
+                dispatch(hideUpdateUI());
+            }
         }
     }
 
@@ -56,7 +64,7 @@ function UpdateNote(props) {
                     <input className='note__title' type='text' maxLength={35} placeholder='Title' defaultValue={note.title} autoFocus={true} onChange={(e) => setTitle(e.target.value)} />
                     <textarea className='note__txt' row='17' wrap='hard' placeholder='Type something here...' defaultValue={note.content} onChange={(e) => setContent(e.target.value)} />
                     <SaveBtn toggle={saveBtn} />
-                    <button className='note__close' type='button' onClick={onClose} />
+                    <button className='note__close' type='button' onClick={onClose}><i className='bx bx-x'></i></button>
                 </form>
             </div>
         );

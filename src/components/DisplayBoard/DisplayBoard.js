@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { doc, collection, query, orderBy, getDocs } from "firebase/firestore";
-import { setIndex, showCreateUI, showReadUI } from '../../features/noteSlice.js';
+import { fetchNotes, setIndex, showCreateUI, showReadUI } from '../../features/noteSlice.js';
+import { db } from '../../firebase.js';
+import { doc, getDoc } from "firebase/firestore";
 import Context from './Context.js';
 import CreateNote from './CreateNote.js';
 import ReadNote from './ReadNote.js';
@@ -18,7 +19,7 @@ function CreateBtn(props) {
         props.setSaveBtn(false);
     }
 
-    if (props.toggle) {
+    if (props.toggle && props.quota) {
         return (
             <button className='display-board__btn' onClick={onOpen}>
                 <i className='bx bxs-plus-circle'></i>
@@ -29,6 +30,10 @@ function CreateBtn(props) {
 
 function DisplayBoard() {
     const dispatch = useDispatch();
+    const uid = useSelector((state) => state.gate.uid);
+    const isLogged = useSelector((state) => state.gate.isLogged);
+    const date = useSelector((state) => state.note.date);
+    const timestamp = useSelector((state) => state.note.timestamp);
     const createBtn = useSelector((state) => state.note.createBtn);
     const createToggle = useSelector((state) => state.note.createToggle);
     const readToggle = useSelector((state) => state.note.readToggle);
@@ -40,6 +45,26 @@ function DisplayBoard() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [saveBtn, setSaveBtn] = useState(false);
+    const [quota, setQuota] = useState(true);
+    
+    useEffect(() => {
+        if (isLogged) {
+            dispatch(fetchNotes({uid}));
+            checkQuota();
+        }
+    }, [isLogged]);
+
+    async function checkQuota() {
+        const docId = timestamp.toString();
+        const ref = doc(db, 'users', uid, 'notes', docId);
+        const response = await getDoc(ref);
+        const data = response.data(response);
+        if (data) {
+            setQuota(false);
+        } else {
+            setQuota(true);
+        }
+    }
 
     function onSelect(i) {
         dispatch(setIndex(i));
@@ -55,6 +80,7 @@ function DisplayBoard() {
             </ul>
             <CreateBtn 
                 toggle={createBtn} 
+                quota={quota}
                 setTitle={setTitle} 
                 setContent={setContent} 
                 setSaveBtn={setSaveBtn}
@@ -65,11 +91,17 @@ function DisplayBoard() {
                 content: content,
                 setContent: setContent,
                 saveBtn: saveBtn,
-                setSaveBtn: setSaveBtn
+                setSaveBtn: setSaveBtn,
+                setQuota: setQuota,
+                isLogged: isLogged,
+                note: note,
+                uid: uid,
+                date: date,
+                timestamp: timestamp
             }}>
                 <CreateNote toggle={createToggle} />
-                <ReadNote toggle={readToggle} note={note} />
-                <UpdateNote toggle={updateToggle} note={note} />
+                <ReadNote toggle={readToggle} />
+                <UpdateNote toggle={updateToggle} />
                 <DeleteNote toggle={deleteToggle} />
             </Context.Provider>
         </main>
