@@ -402,6 +402,45 @@ i {
         width: 250px;
         height: calc(100% - 50px);
         background-color: $main;
+
+        .note-editor{
+            padding: 20px;
+            width: calc(100% - 40px);
+            height: 200px;
+
+            &__title {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: $base;
+            }
+            
+            &__wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            &__btn {
+                width: 20px;
+                height: 20px;
+                border-radius: 5px;
+
+                &:nth-child(1) {
+                    background-color: #FFCACA;
+                } &:nth-child(2) {
+                    background-color: #FFD4A1;
+                } &:nth-child(3) {
+                    background-color: #FDFF93;
+                } &:nth-child(4) {
+                    background-color: #B4FFB2;
+                } &:nth-child(5) {
+                    background-color: #AAD6FF;
+                } &:nth-child(6) {
+                    background-color: #8DADFF;
+                } &:nth-child(7) {
+                    background-color: #E8B7FF;
+                }
+            }
+        }
     }
 
     .display-board {
@@ -419,21 +458,6 @@ i {
             height: 100%;
         }
 
-        &__icon {
-            display: inline-block;
-            width: 60px;
-            height: 50px;
-            margin: 10px;
-            border-radius: 5px;
-            box-shadow: 2px 5px 2px $deep-shadow;
-            background-color: $note-yellow;
-
-            &:hover {
-                border: 1px solid $shallow-shadow;
-                cursor: pointer;
-            }
-        }
-
         &__btn {
             align-self: center;
             position: absolute;
@@ -444,6 +468,52 @@ i {
 
             &:hover i {
                 color: $sub;
+            }
+        }
+
+        .note-icon {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 15px;
+            width: 100px;
+            height: 80px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 5px 2px $deep-shadow;
+            background-color: $note-yellow;
+            transform: scale(1);
+
+            &:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+
+            & i {
+                position: absolute;
+                top: 50px;
+                right: -20px;
+                font-size: 40px;
+                text-shadow: 0 0 2px $sub;
+            }
+
+            &__date {
+                font-size: 14px;
+                text-align: center;
+            }
+
+            &__title {
+                height: 10px;
+                font-size: 8px;
+                margin-top: 5px;
+                overflow: hidden;
+            }
+
+            &__txt {
+                height: 50px;
+                font-size: 8px;
+                margin-top: 5px;
+                overflow: hidden;
             }
         }
 

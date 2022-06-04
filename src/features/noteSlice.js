@@ -26,6 +26,7 @@ export const fetchNotes = createAsyncThunk('note/fetchNotes', async (data) => {
             title: data.title,
             content: data.content,
             timestamp: data.timestamp,
+            noteBg: data.noteBg
         };
         userNotes = [...userNotes, note];
     });
@@ -47,6 +48,7 @@ export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
     const newNote = data.newNote;
     const newTitle = newNote.title.trim();
     const newContent = newNote.content.trim();
+    const newNoteBg = newNote.noteBg;
 
     if (newTitle) {
         await updateDoc(doc(db, 'users', uid, 'notes', docId), {
@@ -57,6 +59,12 @@ export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
     if (newContent) {
         await updateDoc(doc(db, 'users', uid, 'notes', docId), {
             content: newContent
+        });
+    }
+
+    if (newContent) {
+        await updateDoc(doc(db, 'users', uid, 'notes', docId), {
+            noteBg: newNoteBg
         });
     }
 
@@ -121,6 +129,7 @@ export const note = createSlice({
             const note = state.notes[state.index];
             const newTitle = action.payload.title;
             const newContent = action.payload.content;
+            const newNoteBg = action.payload.noteBg;
 
             if (newTitle) {
                 note.title = newTitle;
@@ -129,6 +138,11 @@ export const note = createSlice({
             if (newContent) {
                 note.content = newContent;
             }
+
+            if (newNoteBg) {
+                note.noteBg = newNoteBg;
+            }
+
         },
         hideUpdateUI: (state) => {
             state.status = 'onCall';
@@ -158,6 +172,7 @@ export const note = createSlice({
             const note = state.notes[state.index];
             const newTitle = action.payload.title;
             const newContent = action.payload.content;
+            const newNoteBg = action.payload.noteBg;
 
             if (newTitle) {
                 note.title = newTitle;
@@ -165,6 +180,10 @@ export const note = createSlice({
 
             if (newContent) {
                 note.content = newContent;
+            }
+
+            if (newNoteBg) {
+                note.noteBg = newNoteBg;
             }
         },
         [deleteNote.fulfilled]: (state) => {

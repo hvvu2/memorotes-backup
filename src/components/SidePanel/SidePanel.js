@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import NoteEditor from './NoteEditor.js';
+import TextEditor from './TextEditor.js';
 
 function SidePanel() {
     const panelToggle = useSelector((state) => state.panel.panelToggle);
@@ -7,7 +9,7 @@ function SidePanel() {
     if (panelToggle) {
         return (
             <section className='side-panel'>
-                
+                <NoteEditor />
             </section>
         );
     }

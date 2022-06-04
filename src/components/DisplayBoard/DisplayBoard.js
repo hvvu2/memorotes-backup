@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchNotes, setIndex, showCreateUI, showReadUI } from '../../features/noteSlice.js';
+import { resetNoteBg } from '../../features/panelSlice.js';
 import { db } from '../../firebase.js';
 import { doc, getDoc } from "firebase/firestore";
 import Context from './Context.js';
@@ -17,6 +18,7 @@ function CreateBtn(props) {
         props.setTitle('');
         props.setContent('');
         props.setSaveBtn(false);
+        dispatch(resetNoteBg());
     }
 
     if (props.toggle && props.quota) {
@@ -46,7 +48,7 @@ function DisplayBoard() {
     const [content, setContent] = useState('');
     const [saveBtn, setSaveBtn] = useState(false);
     const [quota, setQuota] = useState(true);
-    
+
     useEffect(() => {
         if (isLogged) {
             dispatch(fetchNotes({uid}));
@@ -74,9 +76,29 @@ function DisplayBoard() {
     return (
         <main className='display-board'>
             <ul className='display-board__wrapper'>
-                {notes.map((info, i) => 
-                    <li className='display-board__icon' key={i} index={i} onClick={() => onSelect(i)} />
-                )}
+                {notes.map((info, i) => {
+                    let noteIconStyle = {
+                        background: info.noteBg
+                    };
+                    if (info.timestamp === timestamp) {
+                        return (
+                            <li className='note-icon' style={noteIconStyle} key={i} index={i} onClick={() => onSelect(i)}>
+                                <h1 className='note-icon__date'>{info.date}</h1>
+                                <h1 className='note-icon__title'>{info.title}</h1>
+                                <p className='note-icon__txt'>{info.content}</p>
+                                <i className='bx bxs-pencil'></i>
+                            </li>
+                        );
+                    } else {
+                        return (
+                            <li className='note-icon' style={noteIconStyle} key={i} index={i} onClick={() => onSelect(i)}>
+                                <h1 className='note-icon__date'>{info.date}</h1>
+                                <h1 className='note-icon__title'>{info.title}</h1>
+                                <p className='note-icon__txt'>{info.content}</p>
+                            </li>
+                        );
+                    }
+                })}
             </ul>
             <CreateBtn 
                 toggle={createBtn} 

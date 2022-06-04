@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { hideReadUI, showUpdateUI, showDeleteUI } from '../../features/noteSlice.js';
+import { modifyNoteBg } from '../../features/panelSlice.js';
 import Context from './Context.js';
 
 function UpdateBtn(props) {
@@ -15,11 +16,7 @@ function UpdateBtn(props) {
     }
 
     if (props.toggle) {
-        return (
-            <button className='note__edit' onClick={onOpen}>
-                <i className='bx bxs-pencil'></i>
-            </button>
-        );
+        return <button className='note__edit' onClick={onOpen}><i className='bx bxs-pencil'></i></button>
     }
 }
 
@@ -51,10 +48,23 @@ function ReadNote(props) {
     });
 
     if (props.toggle) {
+        let noteStyle = {
+            background: null
+        };
+
+        if (isEditable) {
+            noteStyle = {
+                background: `linear-gradient(-45deg, transparent 2em, ${note.noteBg} 0)`
+            };
+        } else {
+            noteStyle = {
+                background: note.noteBg
+            };
+        }
 
         return (
             <div className='mask dim' onClick={() => dispatch(hideReadUI())}>
-                <article className='note' onClick={(e) => e.stopPropagation()}>
+                <article className='note' style={noteStyle} onClick={(e) => e.stopPropagation()}>
                     <h1 className='note__date'>{note.date}</h1>
                     <h1 className='note__title'>{note.title}</h1>
                     <p className='note__txt'>{note.content}</p>

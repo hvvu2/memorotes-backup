@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { showAlert } from '../../features/popupSlice.js';
 import { onUpdate, hideUpdateUI, updateNote } from '../../features/noteSlice.js';
 import Context from './Context.js';
@@ -19,22 +19,35 @@ function UpdateNote(props) {
     const isLogged = value.isLogged;
     const uid = value.uid;
     const note = value.note;
+    const noteBg = useSelector((state) => state.panel.noteBg);
+    const [localNoteBg, setLocalNoteBg] = useState(noteBg);
 
     useEffect(() => {
+        setLocalNoteBg(noteBg);
+
         if (title.trim() || content.trim()) {
             setSaveBtn(true);
         } else {
             setSaveBtn(false);
         }
-    })
+        
+        if (note) {
+            if (localNoteBg != note.noteBg) {
+                setSaveBtn(true);
+            } else {
+                setSaveBtn(false);
+            }
+        }
+    });
 
     function onSave(e) {
         e.preventDefault();
 
-        if (title.trim() || content.trim()) {
+        if (title.trim() || content.trim() || localNoteBg != note.noteBg) {
             const newNote = {
                 title: title,
-                content: content
+                content: content,
+                noteBg: noteBg
             }
 
             if (isLogged) {
@@ -56,9 +69,13 @@ function UpdateNote(props) {
     }
 
     if (props.toggle) {
+        let noteStyle = {
+            background: `linear-gradient(-45deg, transparent 2em, ${localNoteBg} 0)`
+        }
+
         return (
             <div className='mask'>
-                <form className='note' onSubmit={(e) => onSave(e)}>
+                <form className='note' style={noteStyle} onSubmit={(e) => onSave(e)}>
                     <h1 className='note__date'>{note.date}</h1>
                     <i className='note__hint bx bxs-pencil bx-tada'></i>
                     <input className='note__title' type='text' maxLength={35} placeholder='Title' defaultValue={note.title} autoFocus={true} onChange={(e) => setTitle(e.target.value)} />
