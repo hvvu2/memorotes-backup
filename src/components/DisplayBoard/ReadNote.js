@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { hideReadUI, showUpdateUI, showDeleteUI } from '../../features/noteSlice.js';
 import { modifyNoteBg } from '../../features/panelSlice.js';
 import Context from './Context.js';
@@ -44,8 +44,10 @@ function ReadNote(props) {
             } else {
                 setIsEditable(false);
             }
+
+            dispatch(modifyNoteBg(note.noteBg));
         }
-    });
+    }, [note]);
 
     if (props.toggle) {
         let noteStyle = {

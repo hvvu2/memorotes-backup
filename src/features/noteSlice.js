@@ -62,7 +62,7 @@ export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
         });
     }
 
-    if (newContent) {
+    if (newNoteBg) {
         await updateDoc(doc(db, 'users', uid, 'notes', docId), {
             noteBg: newNoteBg
         });
