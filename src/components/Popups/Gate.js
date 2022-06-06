@@ -39,6 +39,7 @@ function Login(props) {
         if (emailPattern.test(email) && pwdPattern.test(pwd)) {
             if (await logInWithEmailAndPassword(email, pwd)) {
                 const user = auth.currentUser;
+                
                 dispatch(login(user.uid));
                 dispatch(hideGate());
             } else {

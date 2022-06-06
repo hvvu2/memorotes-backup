@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { modifyNoteBg } from '../../features/panelSlice';
+import ColorPicker from './ColorPicker.js';
 
 function NoteEditor() {
     const dispatch = useDispatch();
@@ -24,9 +25,9 @@ function NoteEditor() {
                 <button className='note-editor__btn' onClick={() => onModifyNoteBg('#8DADFF')} />
                 <button className='note-editor__btn' onClick={() => onModifyNoteBg('#E8B7FF')} />
             </div>
+            <ColorPicker />
         </div>
     );
 }
-
 
 export default NoteEditor;

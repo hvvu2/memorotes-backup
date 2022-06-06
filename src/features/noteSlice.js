@@ -82,6 +82,7 @@ const initialState = {
     status: 'onCall',
     date: today,
     timestamp: timestamp,
+    onCreateTimestamp: null,
     notes: [],
     index: null,
     createBtn: true,
@@ -102,6 +103,7 @@ export const note = createSlice({
             state.status = 'Creating';
             state.createBtn = false;
             state.createToggle = true;
+            state.onCreateTimestamp = timestamp;
         },
         onCreate: (state, action) => {
             state.notes = [...state.notes, action.payload];
@@ -110,6 +112,7 @@ export const note = createSlice({
             state.status = 'onCall';
             state.createBtn = true;
             state.createToggle = false;
+            state.onCreateTimestamp = null;
         },
         showReadUI: (state) => {
             state.status = 'Reading';
@@ -159,6 +162,9 @@ export const note = createSlice({
         hideDeleteUI: (state) => {
             state.status = 'onCall';
             state.deleteToggle = false;
+        },
+        clearNotes: (state) => {
+            state.notes = [];
         }
     },
     extraReducers: {
@@ -203,6 +209,7 @@ export const {
     hideUpdateUI,
     showDeleteUI,
     onDelete,
-    hideDeleteUI
+    hideDeleteUI,
+    clearNotes
 } = note.actions;
 export default note.reducer;

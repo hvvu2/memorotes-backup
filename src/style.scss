@@ -410,7 +410,7 @@ i {
 
             &__title {
                 font-size: 24px;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
                 color: $base;
             }
             
@@ -440,6 +440,10 @@ i {
                     background-color: #E8B7FF;
                 }
             }
+        }
+
+        .color-picker {
+
         }
     }
 
@@ -492,9 +496,8 @@ i {
             & i {
                 position: absolute;
                 top: 50px;
-                right: -20px;
+                right: -15px;
                 font-size: 40px;
-                text-shadow: 0 0 2px $sub;
             }
 
             &__date {

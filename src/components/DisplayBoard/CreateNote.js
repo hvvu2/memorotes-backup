@@ -13,6 +13,7 @@ function SaveBtn(props) {
 function CreateNote(props) {
     const dispatch = useDispatch();
     const value = useContext(Context);
+    const onCreateTimestamp = useSelector((state) => state.note.onCreateTimestamp);
     const [title, setTitle] = [value.title, value.setTitle];
     const [content, setContent] = [value.content, value.setContent];
     const [saveBtn, setSaveBtn] = [value.saveBtn, value.setSaveBtn];
@@ -47,9 +48,11 @@ function CreateNote(props) {
             };
 
             if (isLogged) {
-                dispatch(createNote({uid, note}));
-                dispatch(hideCreateUI());
-                setQuota(false);
+                if (onCreateTimestamp === timestamp) {
+                    dispatch(createNote({uid, note}));
+                    dispatch(hideCreateUI());
+                    setQuota(false);
+                }
             } else {
                 dispatch(onCreate(note));
                 dispatch(hideCreateUI());

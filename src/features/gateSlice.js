@@ -4,8 +4,6 @@ const initialState = {
     isLogged: false,
     uid: null,
     method: 'Login',
-    gateBtn: true,
-    logOutBtn: false
 }
 
 export const gate = createSlice({
@@ -25,14 +23,10 @@ export const gate = createSlice({
         login: (state, action) => {
             state.isLogged = true;
             state.uid = action.payload;
-            state.gateBtn = false;
-            state.logOutBtn = true;
         },
         logout: (state) => {
             state.isLogged = false;
             state.uid = null;
-            state.gateBtn = true;
-            state.logOutBtn = false;
         }
     }
 });

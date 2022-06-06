@@ -13,6 +13,7 @@ function SaveBtn(props) {
 function UpdateNote(props) {
     const dispatch = useDispatch();
     const value = useContext(Context);
+    const timestamp = useSelector((state) => state.note.timestamp);
     const [title, setTitle] = [value.title, value.setTitle];
     const [content, setContent] = [value.content, value.setContent];
     const [saveBtn, setSaveBtn] = [value.saveBtn, value.setSaveBtn];
@@ -20,11 +21,8 @@ function UpdateNote(props) {
     const uid = value.uid;
     const note = value.note;
     const noteBg = useSelector((state) => state.panel.noteBg);
-    const [localNoteBg, setLocalNoteBg] = useState(noteBg);
 
     useEffect(() => {
-        setLocalNoteBg(noteBg);
-
         if (title.trim() || content.trim()) {
             setSaveBtn(true);
         } else {
@@ -32,7 +30,7 @@ function UpdateNote(props) {
         }
         
         if (note) {
-            if (localNoteBg != note.noteBg) {
+            if (noteBg != note.noteBg) {
                 setSaveBtn(true);
             } else {
                 setSaveBtn(false);
@@ -43,7 +41,7 @@ function UpdateNote(props) {
     function onSave(e) {
         e.preventDefault();
 
-        if (title.trim() || content.trim() || localNoteBg != note.noteBg) {
+        if (title.trim() || content.trim() || noteBg != note.noteBg) {
             const newNote = {
                 title: title,
                 content: content,
@@ -51,8 +49,10 @@ function UpdateNote(props) {
             }
 
             if (isLogged) {
-                dispatch(updateNote({uid, note, newNote}));
-                dispatch(hideUpdateUI());
+                if (note.timestamp === timestamp) {
+                    dispatch(updateNote({uid, note, newNote}));
+                    dispatch(hideUpdateUI());
+                }
             } else {
                 dispatch(onUpdate(newNote));
                 dispatch(hideUpdateUI());
@@ -70,7 +70,7 @@ function UpdateNote(props) {
 
     if (props.toggle) {
         let noteStyle = {
-            background: `linear-gradient(-45deg, transparent 2em, ${localNoteBg} 0)`
+            background: `linear-gradient(-45deg, transparent 2em, ${noteBg} 0)`
         }
 
         return (
