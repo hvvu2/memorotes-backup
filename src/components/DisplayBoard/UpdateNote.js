@@ -23,17 +23,13 @@ function UpdateNote(props) {
     const noteBg = useSelector((state) => state.panel.noteBg);
 
     useEffect(() => {
-        if (title.trim() || content.trim()) {
-            setSaveBtn(true);
-        } else {
-            setSaveBtn(false);
-        }
-        
         if (note) {
             if (noteBg != note.noteBg) {
                 setSaveBtn(true);
-            } else {
-                setSaveBtn(false);
+            }
+
+            if (title.trim() || content.trim()) {
+                setSaveBtn(true);
             }
         }
     });

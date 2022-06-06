@@ -53,6 +53,8 @@ function DisplayBoard() {
         if (isLogged) {
             dispatch(fetchNotes({uid}));
             checkQuota();
+        } else {
+            setQuota(true);
         }
     }, [isLogged]);
 

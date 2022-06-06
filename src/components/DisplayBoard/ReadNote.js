@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { hideReadUI, showUpdateUI, showDeleteUI } from '../../features/noteSlice.js';
 import { modifyNoteBg } from '../../features/panelSlice.js';
 import Context from './Context.js';
@@ -7,12 +7,17 @@ import Context from './Context.js';
 function UpdateBtn(props) {
     const dispatch =useDispatch();
     const value = useContext(Context);
+    const note = value.note;
+    const setTitle = value.setTitle;
+    const setContent = value.setContent;
+    const setSaveBtn = value.setSaveBtn;
 
     function onOpen() {
         dispatch(showUpdateUI());
-        value.setTitle('');
-        value.setContent('');
-        value.setSaveBtn(false);
+        dispatch(modifyNoteBg(note.noteBg));
+        setTitle('');
+        setContent('');
+        setSaveBtn(false);
     }
 
     if (props.toggle) {
@@ -44,8 +49,6 @@ function ReadNote(props) {
             } else {
                 setIsEditable(false);
             }
-
-            dispatch(modifyNoteBg(note.noteBg));
         }
     }, [note]);
 
