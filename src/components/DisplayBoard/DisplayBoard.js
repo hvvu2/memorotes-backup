@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchNotes, setIndex, showCreateUI, showReadUI } from '../../features/noteSlice.js';
-import { resetNoteBg } from '../../features/panelSlice.js';
+import { resetStyle } from '../../features/panelSlice.js';
 import { db } from '../../firebase.js';
 import { doc, getDoc } from "firebase/firestore";
 import Context from './Context.js';
@@ -15,10 +15,10 @@ function CreateBtn(props) {
 
     function onOpen() {
         dispatch(showCreateUI());
+        dispatch(resetStyle());
         props.setTitle('');
         props.setContent('');
         props.setSaveBtn(false);
-        dispatch(resetNoteBg());
     }
 
     if (props.toggle && props.quota) {
@@ -79,24 +79,44 @@ function DisplayBoard() {
         <main className='display-board'>
             <ul className='display-board__wrapper'>
                 {notes.map((info, i) => {
-                    let noteIconStyle = {
-                        background: info.noteBg
+                    const className = 'note-icon__tag ' + info.noteTag;
+                    let noteInlineStyle = {
+                        background: info.noteColor
                     };
+                    let dateInlineStyle = {
+                        color: info.dateColor
+                    }
+                    let titleInlineStyle = {
+                        color: info.titleColor,
+                        fontWeight: info.titleWeight,
+                        fontStyle: info.titleStyle,
+                        textDecoration: info.titleDeco,
+                        textAlign: info.titleAlign
+                    }
+                    let contentInlineStyle = {
+                        color: info.contentColor,
+                        fontWeight: info.contentWeight,
+                        fontStyle: info.contentStyle,
+                        textDecoration: info.titleDeco,
+                        textAlign: info.contentAlign
+                    }
                     if (info.timestamp === timestamp) {
                         return (
-                            <li className='note-icon' style={noteIconStyle} key={i} index={i} onClick={() => onSelect(i)}>
-                                <h1 className='note-icon__date'>{info.date}</h1>
-                                <h1 className='note-icon__title'>{info.title}</h1>
-                                <p className='note-icon__txt'>{info.content}</p>
+                            <li className='note-icon' style={noteInlineStyle} key={i} index={i} onClick={() => onSelect(i)}>
+                                <div className={className} />
+                                <h1 className='note-icon__date' style={dateInlineStyle}>{info.date}</h1>
+                                <h1 className='note-icon__title' style={titleInlineStyle}>{info.title}</h1>
+                                <p className='note-icon__txt' style={contentInlineStyle}>{info.content}</p>
                                 <i className='bx bxs-pencil'></i>
                             </li>
                         );
                     } else {
                         return (
-                            <li className='note-icon' style={noteIconStyle} key={i} index={i} onClick={() => onSelect(i)}>
-                                <h1 className='note-icon__date'>{info.date}</h1>
-                                <h1 className='note-icon__title'>{info.title}</h1>
-                                <p className='note-icon__txt'>{info.content}</p>
+                            <li className='note-icon' style={noteInlineStyle} key={i} index={i} onClick={() => onSelect(i)}>
+                                <div className={className} />
+                                <h1 className='note-icon__date' style={dateInlineStyle}>{info.date}</h1>
+                                <h1 className='note-icon__title' style={titleInlineStyle}>{info.title}</h1>
+                                <p className='note-icon__txt' style={contentInlineStyle}>{info.content}</p>
                             </li>
                         );
                     }

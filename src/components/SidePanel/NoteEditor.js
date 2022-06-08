@@ -1,31 +1,61 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { modifyNoteBg } from '../../features/panelSlice';
-import ColorPicker from './ColorPicker.js';
+import { 
+    modifyNoteColor,
+    modifyNoteStyle,
+    modifyNoteTag
+} from '../../features/panelSlice';
 
 function NoteEditor() {
     const dispatch = useDispatch();
     const noteStatus = useSelector((state) => state.note.status);
 
-    function onModifyNoteBg(code) {
+    function onModifyNoteColor(code) {
         if (noteStatus === 'Creating' || noteStatus === 'Updating') {
-            dispatch(modifyNoteBg(code));
+            dispatch(modifyNoteColor(code));
+        }
+    }
+
+    function onModifyNoteStyle(type) {
+        if (noteStatus === 'Creating' || noteStatus === 'Updating') {
+            dispatch(modifyNoteStyle(type));
+        }
+    }
+
+    function onModifyNoteTag(code) {
+        if (noteStatus === 'Creating' || noteStatus === 'Updating') {
+            dispatch(modifyNoteTag(code));
         }
     }
 
     return (
-        <div className='note-editor'>
-            <h1 className='note-editor__title'>Note Color</h1>
-            <div className='note-editor__wrapper'>
-                <button className='note-editor__btn' onClick={() => onModifyNoteBg('#FFCACA')} />
-                <button className='note-editor__btn' onClick={() => onModifyNoteBg('#FFD4A1')} />
-                <button className='note-editor__btn' onClick={() => onModifyNoteBg('#FDFF93')} />
-                <button className='note-editor__btn' onClick={() => onModifyNoteBg('#B4FFB2')} />
-                <button className='note-editor__btn' onClick={() => onModifyNoteBg('#AAD6FF')} />
-                <button className='note-editor__btn' onClick={() => onModifyNoteBg('#8DADFF')} />
-                <button className='note-editor__btn' onClick={() => onModifyNoteBg('#E8B7FF')} />
+        <div className='editor'>
+            <h1 className='editor__title'>Note</h1>
+            <h1 className='editor__sub-title'>Color</h1>
+            <div className='editor__wrapper noteColor'>
+                <button className='editor__btn' onClick={() => onModifyNoteColor('#FFCACA')} />
+                <button className='editor__btn' onClick={() => onModifyNoteColor('#FFD4A1')} />
+                <button className='editor__btn' onClick={() => onModifyNoteColor('#FDFF93')} />
+                <button className='editor__btn' onClick={() => onModifyNoteColor('#B4FFB2')} />
+                <button className='editor__btn' onClick={() => onModifyNoteColor('#AAD6FF')} />
+                <button className='editor__btn' onClick={() => onModifyNoteColor('#8DADFF')} />
+                <button className='editor__btn' onClick={() => onModifyNoteColor('#E8B7FF')} />
             </div>
-            <ColorPicker />
+            <h1 className='editor__sub-title'>Style</h1>
+            <div className='editor__wrapper noteStyle'>
+                <button className='editor__btn' onClick={() => onModifyNoteStyle(null)}>Blank</button>
+                <button className='editor__btn' onClick={() => onModifyNoteStyle('solid')}>Solid</button>
+                <button className='editor__btn' onClick={() => onModifyNoteStyle('dashed')}>Dashed</button>
+            </div>
+            <h1 className='editor__sub-title'>Tag</h1>
+            <div className='editor__wrapper noteTag'>
+                <button className='editor__btn' onClick={() => onModifyNoteTag(null)}>Ｘ</button>
+                <button className='editor__btn' onClick={() => onModifyNoteTag('yellow')} />
+                <button className='editor__btn' onClick={() => onModifyNoteTag('pink')} />
+                <button className='editor__btn' onClick={() => onModifyNoteTag('green')} />
+                <button className='editor__btn' onClick={() => onModifyNoteTag('blue')} />
+                <button className='editor__btn' onClick={() => onModifyNoteTag('gray')} />
+            </div>
         </div>
     );
 }

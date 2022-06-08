@@ -10,6 +10,8 @@ function SidePanel() {
         return (
             <section className='side-panel'>
                 <NoteEditor />
+                <div className='divider'></div>
+                <TextEditor />
             </section>
         );
     }

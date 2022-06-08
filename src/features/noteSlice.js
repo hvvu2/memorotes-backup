@@ -26,7 +26,20 @@ export const fetchNotes = createAsyncThunk('note/fetchNotes', async (data) => {
             title: data.title,
             content: data.content,
             timestamp: data.timestamp,
-            noteBg: data.noteBg
+            noteColor: data.noteColor,
+            noteStyle: data.noteStyle,
+            noteTag: data.noteTag,
+            dateColor: data.dateColor,
+            titleColor: data.titleColor,
+            titleWeight: data.titleWeight,
+            titleStyle: data.titleStyle,
+            titleDeco: data.titleDeco,
+            titleAlign: data.titleAlign,
+            contentColor: data.contentColor,
+            contentWeight: data.contentWeight,
+            contentStyle: data.contentStyle,
+            contentDeco: data.contentDeco,
+            contentAlign: data.contentAlign
         };
         userNotes = [...userNotes, note];
     });
@@ -48,7 +61,20 @@ export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
     const newNote = data.newNote;
     const newTitle = newNote.title.trim();
     const newContent = newNote.content.trim();
-    const newNoteBg = newNote.noteBg;
+    const newNoteColor = newNote.noteColor;
+    const newNoteStyle = newNote.noteStyle;
+    const newNoteTag = newNote.noteTag;
+    const newDateColor = newNote.dateColor;
+    const newTitleColor = newNote.titleColor;
+    const newTitleWeight = newNote.titleWeight;
+    const newTitleStyle = newNote.titleStyle;
+    const newTitleDeco = newNote.titleDeco;
+    const newTitleAlign = newNote.titleAlign;
+    const newContentColor = newNote.contentColor;
+    const newContentWeight = newNote.contentWeight;
+    const newContentStyle = newNote.contentStyle;
+    const newContentDeco = newNote.contentDeco;
+    const newContentAlign = newNote.contentAlign;
 
     if (newTitle) {
         await updateDoc(doc(db, 'users', uid, 'notes', docId), {
@@ -62,11 +88,22 @@ export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
         });
     }
 
-    if (newNoteBg) {
-        await updateDoc(doc(db, 'users', uid, 'notes', docId), {
-            noteBg: newNoteBg
-        });
-    }
+    await updateDoc(doc(db, 'users', uid, 'notes', docId), {
+        noteColor: newNoteColor,
+        noteStyle: newNoteStyle,
+        noteTag: newNoteTag,
+        dateColor: newDateColor,
+        titleColor: newTitleColor,
+        titleWeight: newTitleWeight,
+        titleStyle: newTitleStyle,
+        titleDeco: newTitleDeco,
+        titleAlign: newTitleAlign,
+        contentColor: newContentColor,
+        contentWeight: newContentWeight,
+        contentStyle: newContentStyle,
+        contentDeco: newContentDeco,
+        contentAlign: newContentAlign
+    });
 
     return newNote;
 });
@@ -132,7 +169,20 @@ export const note = createSlice({
             const note = state.notes[state.index];
             const newTitle = action.payload.title;
             const newContent = action.payload.content;
-            const newNoteBg = action.payload.noteBg;
+            const newNoteColor = action.payload.noteColor;
+            const newNoteStyle = action.payload.noteStyle;
+            const newNoteTag = action.payload.noteTag;
+            const newDateColor = action.payload.dateColor;
+            const newTitleColor = action.payload.titleColor;
+            const newTitleWeight = action.payload.titleWeight;
+            const newTitleStyle = action.payload.titleStyle;
+            const newTitleDeco = action.payload.titleDeco;
+            const newTitleAlign = action.payload.titleAlign;
+            const newContentColor = action.payload.contentColor;
+            const newContentWeight = action.payload.contentWeight;
+            const newContentStyle = action.payload.contentStyle;
+            const newContentDeco = action.payload.contentDeco;
+            const newContentAlign = action.payload.contentAlign;
 
             if (newTitle) {
                 note.title = newTitle;
@@ -141,11 +191,21 @@ export const note = createSlice({
             if (newContent) {
                 note.content = newContent;
             }
-
-            if (newNoteBg) {
-                note.noteBg = newNoteBg;
-            }
-
+            
+            note.noteColor = newNoteColor;
+            note.noteStyle = newNoteStyle;
+            note.noteTag = newNoteTag;
+            note.dateColor = newDateColor;
+            note.titleColor = newTitleColor;
+            note.titleWeight = newTitleWeight;
+            note.titleStyle = newTitleStyle;
+            note.titleDeco = newTitleDeco;
+            note.titleAlign = newTitleAlign;
+            note.contentColor = newContentColor;
+            note.contentWeight = newContentWeight;
+            note.contentStyle = newContentStyle;
+            note.contentDeco = newContentDeco;
+            note.contentAlign = newContentAlign;
         },
         hideUpdateUI: (state) => {
             state.status = 'onCall';
@@ -178,7 +238,20 @@ export const note = createSlice({
             const note = state.notes[state.index];
             const newTitle = action.payload.title;
             const newContent = action.payload.content;
-            const newNoteBg = action.payload.noteBg;
+            const newNoteColor = action.payload.noteColor;
+            const newNoteStyle = action.payload.noteStyle;
+            const newNoteTag = action.payload.noteTag;
+            const newDateColor = action.payload.dateColor;
+            const newTitleColor = action.payload.titleColor;
+            const newTitleWeight = action.payload.titleWeight;
+            const newTitleStyle = action.payload.titleStyle;
+            const newTitleDeco = action.payload.titleDeco;
+            const newTitleAlign = action.payload.titleAlign;
+            const newContentColor = action.payload.contentColor;
+            const newContentWeight = action.payload.contentWeight;
+            const newContentStyle = action.payload.contentStyle;
+            const newContentDeco = action.payload.contentDeco;
+            const newContentAlign = action.payload.contentAlign;
 
             if (newTitle) {
                 note.title = newTitle;
@@ -188,9 +261,20 @@ export const note = createSlice({
                 note.content = newContent;
             }
 
-            if (newNoteBg) {
-                note.noteBg = newNoteBg;
-            }
+            note.noteColor = newNoteColor;
+            note.noteStyle = newNoteStyle;
+            note.noteTag = newNoteTag;
+            note.dateColor = newDateColor;
+            note.titleColor = newTitleColor;
+            note.titleWeight = newTitleWeight;
+            note.titleStyle = newTitleStyle;
+            note.titleDeco = newTitleDeco;
+            note.titleAlign = newTitleAlign;
+            note.contentColor = newContentColor;
+            note.contentWeight = newContentWeight;
+            note.contentStyle = newContentStyle;
+            note.contentDeco = newContentDeco;
+            note.contentAlign = newContentAlign;
         },
         [deleteNote.fulfilled]: (state) => {
             state.notes.splice(state.index, 1);

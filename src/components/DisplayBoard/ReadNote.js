@@ -1,8 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { hideReadUI, showUpdateUI, showDeleteUI } from '../../features/noteSlice.js';
-import { modifyNoteBg } from '../../features/panelSlice.js';
+import { inheritStyle } from '../../features/panelSlice.js';
 import Context from './Context.js';
+
+function Tag(props) {
+    if (props.toggle) {
+        const className = 'note__tag ' + props.toggle;
+        return <div className={className} />;
+    }
+}
 
 function UpdateBtn(props) {
     const dispatch =useDispatch();
@@ -14,7 +21,7 @@ function UpdateBtn(props) {
 
     function onOpen() {
         dispatch(showUpdateUI());
-        dispatch(modifyNoteBg(note.noteBg));
+        dispatch(inheritStyle(note));
         setTitle('');
         setContent('');
         setSaveBtn(false);
@@ -30,6 +37,31 @@ function DeleteBtn(props) {
 
     if (props.toggle) {
         return <button className='note__delete' onClick={() => dispatch(showDeleteUI())}><i className='bx bxs-trash-alt'></i></button>;
+    }
+}
+
+function Lines(props) {
+    if (props.toggle) {
+        const className = 'note__line ' + props.toggle;
+        return (
+        <div className='note__lines'>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+        </div>
+        );
     }
 }
 
@@ -53,28 +85,47 @@ function ReadNote(props) {
     }, [note]);
 
     if (props.toggle) {
-        let noteStyle = {
+        let noteInlineStyle = {
             background: null
+        };
+        let dateInlineStyle = {
+            color: note.dateColor
+        };
+        let titleInlineStyle = {
+            color: note.titleColor,
+            fontWeight: note.titleWeight,
+            fontStyle: note.titleStyle,
+            textDecoration: note.titleDeco,
+            textAlign: note.titleAlign
+        };
+        let contentInlineStyle = {
+            color: note.contentColor,
+            fontWeight: note.contentWeight,
+            fontStyle: note.contentStyle,
+            textDecoration: note.contentDeco,
+            textAlign: note.contentAlign
         };
 
         if (isEditable) {
-            noteStyle = {
-                background: `linear-gradient(-45deg, transparent 2em, ${note.noteBg} 0)`
+            noteInlineStyle = {
+                background: `linear-gradient(-45deg, transparent 2em, ${note.noteColor} 0)`
             };
         } else {
-            noteStyle = {
-                background: note.noteBg
+            noteInlineStyle = {
+                background: note.noteColor
             };
         }
 
         return (
             <div className='mask dim' onClick={() => dispatch(hideReadUI())}>
-                <article className='note' style={noteStyle} onClick={(e) => e.stopPropagation()}>
-                    <h1 className='note__date'>{note.date}</h1>
-                    <h1 className='note__title'>{note.title}</h1>
-                    <p className='note__txt'>{note.content}</p>
+                <article className='note' style={noteInlineStyle} onClick={(e) => e.stopPropagation()}>
+                    <Tag toggle={note.noteTag} />
+                    <h1 className='note__date' style={dateInlineStyle}>{note.date}</h1>
+                    <h1 className='note__title' style={titleInlineStyle}>{note.title}</h1>
+                    <p className='note__txt' style={contentInlineStyle}>{note.content}</p>
                     <UpdateBtn toggle={isEditable} />
                     <DeleteBtn toggle={isEditable} />
+                    <Lines toggle={note.noteStyle} />
                 </article>
             </div>
         );

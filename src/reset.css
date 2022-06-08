@@ -41,7 +41,11 @@ input, textarea, input:focus, textarea:focus{
     border: none;
     outline: none;
 }
+textarea:focus{
+	margin-top: 0;
+}
 textarea{
+	margin-top: 0;
 	resize: none;
 }
 input:focus::placeholder, textarea:focus::placeholder{
