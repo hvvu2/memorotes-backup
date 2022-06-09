@@ -30,6 +30,28 @@ function CreateBtn(props) {
     }
 }
 
+function Lines(props) {
+    if (props.toggle) {
+        const className = 'note-icon__line ' + props.toggle;
+        return (
+        <div className='note-icon__lines'>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+            <div className={className}></div>
+        </div>  
+        );  
+    }
+}
+
 function DisplayBoard() {
     const dispatch = useDispatch();
     const uid = useSelector((state) => state.gate.uid);
@@ -108,6 +130,7 @@ function DisplayBoard() {
                                 <h1 className='note-icon__title' style={titleInlineStyle}>{info.title}</h1>
                                 <p className='note-icon__txt' style={contentInlineStyle}>{info.content}</p>
                                 <i className='bx bxs-pencil'></i>
+                                <Lines toggle={info.noteStyle} />
                             </li>
                         );
                     } else {
@@ -117,6 +140,7 @@ function DisplayBoard() {
                                 <h1 className='note-icon__date' style={dateInlineStyle}>{info.date}</h1>
                                 <h1 className='note-icon__title' style={titleInlineStyle}>{info.title}</h1>
                                 <p className='note-icon__txt' style={contentInlineStyle}>{info.content}</p>
+                                <Lines toggle={info.noteStyle} />
                             </li>
                         );
                     }

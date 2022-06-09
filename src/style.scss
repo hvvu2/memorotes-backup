@@ -580,6 +580,7 @@ i {
 
             & i {
                 position: absolute;
+                z-index: 99;
                 top: 50px;
                 right: -15px;
                 font-size: 40px;
@@ -685,10 +686,31 @@ i {
             }
 
             &__txt {
-                height: 50px;
+                height: 75px;
                 font-size: 6px;
                 white-space: pre-wrap;
                 overflow: hidden;
+            }
+
+            &__lines {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: absolute;
+                top: 32px;
+                width: 120px;
+                height: 73.23px;
+                pointer-events: none;
+            }
+
+            &__line.solid {
+                height: 1px;
+                background-color: $deep-shadow;
+            }
+
+            &__line.dashed {
+                height: 1px;
+                background: repeating-linear-gradient(to right, $deep-shadow 0, $deep-shadow 6px,transparent 8px,transparent 10px);
             }
         }
 
