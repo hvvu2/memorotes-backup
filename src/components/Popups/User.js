@@ -19,7 +19,6 @@ function Lines() {
     );
 }
 
-
 function User(props) {
     const dispatch = useDispatch();
     const userName = useSelector((state) => state.gate.userName);
@@ -30,6 +29,7 @@ function User(props) {
         logOut();
         dispatch(clearNotes());
         dispatch(logout());
+        dispatch(hideUser());
     }
 
     if (props.toggle) {
