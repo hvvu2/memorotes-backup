@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { showAlert } from '../../features/popupSlice.js';
 import { onUpdate, hideUpdateUI, updateNote } from '../../features/noteSlice.js';
+import { resetStyle } from '../../features/panelSlice.js';
 import Context from './Context.js';
 
 function Tag(props) {
@@ -136,10 +137,12 @@ function UpdateNote(props) {
                 if (note.timestamp === timestamp) {
                     dispatch(updateNote({uid, note, newNote}));
                     dispatch(hideUpdateUI());
+                    dispatch(resetStyle());
                 }
             } else {
                 dispatch(onUpdate(newNote));
                 dispatch(hideUpdateUI());
+                dispatch(resetStyle());
             }
         }
     }
@@ -166,6 +169,7 @@ function UpdateNote(props) {
             dispatch(showAlert('Discard'));
         } else {
             dispatch(hideUpdateUI());
+            dispatch(resetStyle());
         }
     }
 

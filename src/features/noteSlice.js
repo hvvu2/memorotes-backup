@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { doc, collection, query, orderBy, getDocs, setDoc, updateDoc, deleteDoc, serverTimestamp } from "firebase/firestore";
+import { doc, collection, query, orderBy, getDocs, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase.js';
 
 const datetime = new Date();

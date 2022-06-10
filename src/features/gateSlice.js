@@ -1,8 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+
+export const fetchUserName = createAsyncThunk('user/fetchUserName', async (data) => {
+    const uid = data.uid;
+    const ref = doc(db, 'users', uid);
+    const result = await getDoc(ref);
+    const userName = result.data().name;
+    return userName;
+});
 
 const initialState = {
     isLogged: false,
     uid: null,
+    userName: null,
     method: 'Login',
 }
 
@@ -27,6 +40,11 @@ export const gate = createSlice({
         logout: (state) => {
             state.isLogged = false;
             state.uid = null;
+        }
+    },
+    extraReducers: {
+        [fetchUserName.fulfilled]: (state, action) => {
+            state.userName = action.payload;
         }
     }
 });

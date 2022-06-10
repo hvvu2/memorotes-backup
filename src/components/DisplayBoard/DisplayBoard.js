@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchNotes, setIndex, showCreateUI, showReadUI } from '../../features/noteSlice.js';
-import { resetStyle } from '../../features/panelSlice.js';
+import { defaultStyle } from '../../features/panelSlice.js';
 import { db } from '../../firebase.js';
 import { doc, getDoc } from "firebase/firestore";
 import Context from './Context.js';
@@ -15,7 +15,7 @@ function CreateBtn(props) {
 
     function onOpen() {
         dispatch(showCreateUI());
-        dispatch(resetStyle());
+        dispatch(defaultStyle());
         props.setTitle('');
         props.setContent('');
         props.setSaveBtn(false);

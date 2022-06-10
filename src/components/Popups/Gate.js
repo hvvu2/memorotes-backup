@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { reset, switchMethod, login } from '../../features/gateSlice.js';
+import { reset, switchMethod, login, fetchUserName } from '../../features/gateSlice.js';
 import { hideGate } from '../../features/popupSlice.js';
 import { auth, registerWithEmailAndPassword, logInWithEmailAndPassword } from '../../firebase.js';
 
@@ -38,9 +38,10 @@ function Login(props) {
         e.preventDefault();
         if (emailPattern.test(email) && pwdPattern.test(pwd)) {
             if (await logInWithEmailAndPassword(email, pwd)) {
-                const user = auth.currentUser;
-                
-                dispatch(login(user.uid));
+                const uid = auth.currentUser.uid;
+
+                dispatch(fetchUserName({uid}));
+                dispatch(login(uid));
                 dispatch(hideGate());
             } else {
                 setMsg('Oops! The e-mail or the password is wrong.');

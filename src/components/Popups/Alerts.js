@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideAlert } from '../../features/popupSlice.js'
 import { hideCreateUI, hideUpdateUI } from '../../features/noteSlice.js';
+import { resetStyle } from '../../features/panelSlice.js';
 
 function DiscardCreating() {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ function DiscardCreating() {
     function onDiscard() {
         dispatch(hideCreateUI());
         dispatch(hideAlert());
+        dispatch(resetStyle());
     }
 
     return (
@@ -33,6 +35,7 @@ function DiscardUpdating() {
     function onDiscard() {
         dispatch(hideUpdateUI());
         dispatch(hideAlert());
+        dispatch(resetStyle());
     }
 
     return (

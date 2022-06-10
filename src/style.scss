@@ -4,6 +4,7 @@
 $main: #78574C;
 $sub: #AE9288;
 $base: #FFF7EC;
+$sub-base: #9F8277;
 $ok: #63FF65;
 $err: #F86F6F;
 $err-hover: #F02222;
@@ -71,6 +72,11 @@ i {
     background-color: $base;
 }
 
+.xl {
+    width: 500px;
+    height: 500px;
+}
+
 .l {
     width: 600px;
     height: 400px;
@@ -120,6 +126,7 @@ i {
         &__title {
             position: absolute;
             top: -20px;
+            z-index: 5;
             width: 240px;
             height: 60px;
             font-size: 30px;
@@ -361,6 +368,88 @@ i {
                 }
             }
         }
+
+        .user {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            z-index: 1;
+            width: 480px;
+            height: 420px;
+            border-radius: 5px;
+
+            &__img-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                width: 160px;
+                height: 160px;
+                margin-bottom: 20px;
+                border: 3px dashed $main;
+                border-radius: 5px;
+            }
+
+            &__img {
+                width: 150px;
+                height: 150px;
+                border-radius: 5px;
+                background-color: $main;
+            }
+
+            &__upload {
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            &__wrapper {
+                display: flex;
+                position: relative;
+                margin-bottom: 15px;
+            }
+
+            &__title {
+                height: 30px;
+                font-size: 30px;
+                color: $main;
+            }
+
+            &__sub-title {
+                height: 20px;
+                font-size: 20px;
+                margin-bottom: 8px;
+                color: $main;
+            }
+
+            &__edit {
+                display: flex;
+                position: absolute;
+                right: -25px;
+                align-items: center;
+                height: 30px;
+                font-size: 20px;
+                margin-left: 10px;
+            }
+
+            &__lines {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                position: absolute;
+                bottom: 10px;
+                width: 100%;
+                height: 200px;
+            }
+
+            &__line {
+                height: 1px;
+                background-color: rgba($color: $main, $alpha: 0.5);
+            }
+        }
     }
 
     .navbar {
@@ -378,15 +467,22 @@ i {
 
         &__wrapper {
             display: flex;
-            justify-content: space-between;
-            width: 75px;
+            align-items: center;
+        }
+
+        &__txt {
+            height: 22px;
+            font-size: 22px;
             margin-right: 20px;
+            text-align: left;
+            color: $main;
         }
 
         &__btn {
             width: 25px;
             height: 25px;
             font-size: 25px;
+            margin-right: 20px  ;
 
             & i {
                 font-weight: bold;
@@ -438,6 +534,15 @@ i {
                 width: 20px;
                 height: 20px;
                 border-radius: 5px;
+
+                &.active {
+                    border: 2px solid $base;
+                    border-radius: 50%;
+                }
+
+                &:hover {
+                    opacity: 0.9;
+                }
             }
 
             &__wrapper.noteColor {
@@ -467,6 +572,10 @@ i {
                     border-radius: 5px;
                     background-color: $sub;
                     border: none;
+
+                    &.active {
+                        background-color: $base;
+                    }
                     
                     &:hover {
                         background-color: $base;
@@ -476,9 +585,18 @@ i {
 
             &__wrapper.noteTag {
                 .editor__btn:nth-child(1) {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     font-weight: bold;
+                    font-size: 20px;
                     color: $main;
+                    border-radius: 5px;
                     background-color: $sub;
+
+                    &.active {
+                        background-color: $base;
+                    }
 
                     &:hover {
                         background-color: $base;
@@ -504,10 +622,14 @@ i {
                 } .editor__btn:nth-child(3) {
                     background-color: #FFF7EC;
                 } .editor__btn:nth-child(4) {
-                    width: 22px;
-                    height: 22px;
                     border: 2px solid $border;
                     background-color: #78574C;
+
+                    &.active {
+                        width: 20px;
+                        height: 20px;
+                        border-color: $base;
+                    }
                 } .editor__btn:nth-child(5) {
                     background-color: #AE9288;
                 }
@@ -519,6 +641,11 @@ i {
                     justify-content: center;
                     align-items: center;
                     background-color: $sub;
+
+                    &.active {
+                        border-radius: 5px;
+                        background-color: $base;
+                    }
 
                     & i {
                         font-size: 20px;
@@ -543,6 +670,7 @@ i {
         &__wrapper {
             display: flex;
             flex-wrap: wrap;
+            align-content: flex-start;
             padding: 20px;
             height: 100%;
         }

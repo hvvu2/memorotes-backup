@@ -2,20 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     panelToggle: false,
-    noteColor: '#FDFF93',
+    noteColor: null,
     noteStyle: null,
     noteTag: null,
-    dateColor: '#505050',
-    titleColor: '#505050',
-    titleWeight: 'normal',
-    titleStyle: 'normal',
-    titleDeco: 'none',
-    titleAlign: 'left',
-    contentColor: '505050',
-    contentWeight: 'normal',
-    contentStyle: 'normal',
-    contentDeco: 'none',
-    contentAlign: 'left'
+    dateColor: null,
+    titleColor: null,
+    titleWeight: null,
+    titleStyle: null,
+    titleDeco: null,
+    titleAlign: null,
+    contentColor: null,
+    contentWeight: null,
+    contentStyle: null,
+    contentDeco: null,
+    contentAlign: null
 }
 
 export const panel = createSlice({
@@ -26,9 +26,25 @@ export const panel = createSlice({
             state.panelToggle = true;
         },
         resetStyle: (state) => {
-            state.noteColor = '#FDFF93';
+            state.noteColor = null;
             state.noteStyle = null;
             state.noteTag = null;
+            state.dateColor = null;
+            state.titleColor = null;
+            state.titleWeight = null;
+            state.titleStyle = null;
+            state.titleDeco = null;
+            state.titleAlign = null;
+            state.contentColor = null;
+            state.contentWeight = null;
+            state.contentStyle = null;
+            state.contentDeco = null;
+            state.contentAlign = null;
+        },
+        defaultStyle: (state) => {
+            state.noteColor = '#FDFF93';
+            state.noteStyle = 'blank';
+            state.noteTag = 'none';
             state.dateColor = '#505050';
             state.titleColor = '#505050';
             state.titleWeight = 'normal';
@@ -132,6 +148,7 @@ export const panel = createSlice({
 export const {
     showPanel,
     resetStyle,
+    defaultStyle,
     modifyNoteColor,
     modifyNoteStyle,
     modifyNoteTag,

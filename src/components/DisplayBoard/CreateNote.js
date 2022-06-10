@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showAlert } from '../../features/popupSlice.js'
 import { hideCreateUI, onCreate, createNote } from '../../features/noteSlice.js';
 import Context from './Context.js';
+import { resetStyle } from '../../features/panelSlice.js';
 
 function Tag(props) {
     if (props.toggle) {
@@ -126,11 +127,13 @@ function CreateNote(props) {
                 if (onCreateTimestamp === timestamp) {
                     dispatch(createNote({uid, note}));
                     dispatch(hideCreateUI());
+                    dispatch(resetStyle());
                     setQuota(false);
                 }
             } else {
                 dispatch(onCreate(note));
                 dispatch(hideCreateUI());
+                dispatch(resetStyle());
             }
         }
     }
@@ -139,7 +142,8 @@ function CreateNote(props) {
         if (title || content) {
             dispatch(showAlert('Discard'));
         } else {
-            dispatch((hideCreateUI()));
+            dispatch(hideCreateUI());
+            dispatch(resetStyle());
         }
     }
 

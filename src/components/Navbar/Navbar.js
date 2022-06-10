@@ -1,30 +1,21 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../firebase.js';
-import { clearNotes } from '../../features/noteSlice.js';
-import { showGate } from '../../features/popupSlice.js';
-import { logout } from '../../features/gateSlice.js';
+import { showGate, showUser } from '../../features/popupSlice.js';
 import { showPanel, hidePanel } from '../../features/panelSlice.js';
+
+function UserBtn(props) {
+    const dispatch = useDispatch();
+
+    if (props.toggle) {
+        return <button className='navbar__btn' onClick={() => dispatch(showUser())}><i className='bx bxs-user-circle'></i></button>;
+    }
+}
 
 function GateBtn(props) {
     const dispatch = useDispatch();
 
     if (!props.toggle) {
-        return <button className='navbar__btn' onClick={() => dispatch(showGate())}><i className='bx bxs-user-circle'></i></button>;
-    }
-}
-
-function LogOutBtn(props) {
-    const dispatch = useDispatch();
-
-    function onLogOut() {
-        logOut();
-        dispatch(logout());
-        dispatch(clearNotes());
-    }
-
-    if (props.toggle) {
-        return <button className='navbar__btn' onClick={onLogOut}><i className='bx bx-log-out-circle'></i></button>;
+        return <button className='navbar__btn' onClick={() => dispatch(showGate())}><i className='bx bx-log-in-circle'></i></button>;
     }
 }
 
@@ -45,8 +36,8 @@ function Navbar() {
         <nav className='navbar'>
             <h1 className='navbar__title'>Memorotes</h1>
             <div className='navbar__wrapper'>
+                <UserBtn toggle={isLogged} />
                 <GateBtn toggle={isLogged} />
-                <LogOutBtn toggle={isLogged} />
                 <button className='navbar__btn' onClick={onOpen}><i className='bx bxs-palette'></i></button>
             </div>
         </nav>
