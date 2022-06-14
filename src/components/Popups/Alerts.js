@@ -54,15 +54,65 @@ function DiscardUpdating() {
     );
 }
 
+function ExpiredCreating() {
+    const dispatch = useDispatch();
+    const style = {
+        background: '#AE9288'
+    };
+
+    return (
+        <div className='mask'>
+        <div className='popup s' style={style}>
+            <h1 className='popup__title'>This note has expired</h1>
+            <div className='popup__wrapper'>
+                <p className='popup__txt lh-s'>
+                    Oops! Time past never returns...<br/>
+                    Please create another note for today.
+                </p>
+            </div>
+            <button className='popup__btn' onClick={() => dispatch(hideAlert())}>Confirm</button>
+        </div>
+    </div>
+    );
+}
+
+function ExpiredUpdating() {
+    const dispatch = useDispatch();
+    const style = {
+        background: '#AE9288'
+    };
+
+    return (
+        <div className='mask'>
+        <div className='popup s' style={style}>
+            <h1 className='popup__title'>This note has expired</h1>
+            <div className='popup__wrapper'>
+                <p className='popup__txt'>
+                    Time flies...
+                    Everything has become a memory.
+                </p>
+            </div>
+            <button className='popup__btn' onClick={() => dispatch(hideAlert())}>Confirm</button>
+        </div>
+    </div>
+    );
+}
+
 function Alerts(props) {
     const noteStatus = useSelector((state) => state.note.status);
 
     if (props.toggle) {
-        if (props.type == 'Discard') {
-            if (noteStatus == 'Creating') {
+        if (props.type === 'Discard') {
+            if (noteStatus === 'Creating') {
                 return <DiscardCreating />;
-            } else if (noteStatus == 'Updating') {
+            } else if (noteStatus === 'Updating') {
                 return <DiscardUpdating />;
+            }
+        } else if (props.type === 'Expired') {
+            if (noteStatus === 'Creating') {
+                return <ExpiredCreating />;
+            } else if (noteStatus === 'Updating') {
+                return <ExpiredUpdating />;
             }
         }
     }

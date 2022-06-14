@@ -142,6 +142,10 @@ i {
             text-align: center;
             line-height: 50px;
             color: $main;
+
+            &.lh-s {
+                line-height: 30px;
+            }
         }
 
         &__link {
@@ -463,6 +467,7 @@ i {
             font-size: 32px;
             margin-left: 20px;
             color: $base;
+            cursor: pointer;
         }
 
         &__wrapper {

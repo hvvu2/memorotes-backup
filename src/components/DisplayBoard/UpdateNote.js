@@ -138,6 +138,8 @@ function UpdateNote(props) {
                     dispatch(updateNote({uid, note, newNote}));
                     dispatch(hideUpdateUI());
                     dispatch(resetStyle());
+                } else {
+                    dispatch(showAlert('Expired'));
                 }
             } else {
                 dispatch(onUpdate(newNote));

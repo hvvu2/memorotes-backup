@@ -129,6 +129,8 @@ function CreateNote(props) {
                     dispatch(hideCreateUI());
                     dispatch(resetStyle());
                     setQuota(false);
+                } else {
+                    dispatch(showAlert('Expired'));
                 }
             } else {
                 dispatch(onCreate(note));

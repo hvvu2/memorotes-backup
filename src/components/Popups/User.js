@@ -46,9 +46,7 @@ function User(props) {
                             <h1 className='user__title'>{userName}</h1>
                             <button className='user__edit'><i className='bx bxs-pencil'></i></button>
                         </div>
-                        <span className='user__sub-title'>Member Since: <span className='highlight'></span></span>
                         <span className='user__sub-title'>Total Notes: <span className='highlight'>{notes.length}</span></span>
-                        
                         <Lines />
                     </article>
                     <button className='popup__btn' onClick={onLogOut}>Log Out</button>

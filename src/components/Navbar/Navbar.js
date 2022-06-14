@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showGate, showUser } from '../../features/popupSlice.js';
+import { showWelcome, showGate, showUser } from '../../features/popupSlice.js';
 import { showPanel, hidePanel } from '../../features/panelSlice.js';
 
 function UserBtn(props) {
@@ -34,7 +34,7 @@ function Navbar() {
 
     return (
         <nav className='navbar'>
-            <h1 className='navbar__title'>Memorotes</h1>
+            <h1 className='navbar__title' onClick={() => dispatch(showWelcome())}>Memorotes</h1>
             <div className='navbar__wrapper'>
                 <UserBtn toggle={isLogged} />
                 <GateBtn toggle={isLogged} />
