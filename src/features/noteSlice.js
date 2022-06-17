@@ -50,12 +50,14 @@ export const createNote = createAsyncThunk('note/createNote', async (data) => {
     const uid = data.uid;
     const note = data.note;
     const docId = note.timestamp.toString();
+    const ref = doc(db, 'users', uid, 'notes', docId);
 
-    await setDoc(doc(db, 'users', uid, 'notes', docId), note);
+    await setDoc(ref, note);
     return note;
 });
 
 export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
+    const ref = doc(db, 'users', uid, 'notes', docId);
     const uid = data.uid;
     const docId = data.note.timestamp.toString();
     const newNote = data.newNote;
@@ -77,18 +79,18 @@ export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
     const newContentAlign = newNote.contentAlign;
 
     if (newTitle) {
-        await updateDoc(doc(db, 'users', uid, 'notes', docId), {
+        await updateDoc(ref, {
             title: newTitle
         });
     }
 
     if (newContent) {
-        await updateDoc(doc(db, 'users', uid, 'notes', docId), {
+        await updateDoc(ref, {
             content: newContent
         });
     }
 
-    await updateDoc(doc(db, 'users', uid, 'notes', docId), {
+    await updateDoc(ref, {
         noteColor: newNoteColor,
         noteStyle: newNoteStyle,
         noteTag: newNoteTag,
@@ -104,21 +106,20 @@ export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
         contentDeco: newContentDeco,
         contentAlign: newContentAlign
     });
-
     return newNote;
 });
 
 export const deleteNote = createAsyncThunk('note/deleteNote', async (data) => {
     const uid = data.uid;
     const docId = data.note.timestamp.toString();
+    const ref = doc(db, 'users', uid, 'notes', docId);
 
-    await deleteDoc(doc(db, 'users', uid, 'notes', docId));
+    await deleteDoc(ref);
 });
 
 const initialState = {
     status: 'onCall',
     date: today,
-    timestamp: timestamp,
     onCreateTimestamp: null,
     notes: [],
     index: null,

@@ -24,8 +24,8 @@ function Message(props) {
 
 function Login(props) {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
-    const [pwd, setPwd] = useState('');
+    const [email, setEmail] = useState('guest@guest.gst');
+    const [pwd, setPwd] = useState('000000');
     const [msg, setMsg] = useState('');
 
     useEffect(() => {
@@ -41,9 +41,11 @@ function Login(props) {
         if (emailPattern.test(email) && pwdPattern.test(pwd)) {
             if (await logInWithEmailAndPassword(email, pwd)) {
                 const uid = auth.currentUser.uid;
+                const rawSignUpDate = new Date(auth.currentUser.metadata.creationTime).toISOString();
+                const signUpDate = rawSignUpDate.substring(0, 10);
 
                 dispatch(fetchUserName({uid}));
-                dispatch(login(uid));
+                dispatch(login({uid, signUpDate}));
                 dispatch(hideGate());
                 dispatch(hideCreateUI());
                 dispatch(hideReadUI());
@@ -68,8 +70,8 @@ function Login(props) {
                     <h1 className='gate__method'>Login</h1>
                     <h1 className='gate__sub-title'>Welcome back!</h1>
                     <div className='gate__input-wrapper'>
-                        <input className='gate__input' name='email' type='text' placeholder='Enter your e-mail' onChange={(e) => setEmail(e.target.value)}></input>
-                        <input className='gate__input' name='pwd' type='password' placeholder='Enter your password' onChange={(e) => setPwd(e.target.value)}></input>
+                        <input className='gate__input' name='email' type='text' defaultValue={'guest@guest.gst'} placeholder='Enter your e-mail' onChange={(e) => setEmail(e.target.value)}></input>
+                        <input className='gate__input' name='pwd' type='password' defaultValue={'000000'} placeholder='Enter your password' onChange={(e) => setPwd(e.target.value)}></input>
                     </div>
                     <Message method={props.method} msg={msg} />
                     <button className='gate__submit' type='submit'>Login</button>

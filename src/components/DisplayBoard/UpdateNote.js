@@ -46,7 +46,7 @@ function Lines(props) {
 function UpdateNote(props) {
     const dispatch = useDispatch();
     const value = useContext(Context);
-    const timestamp = useSelector((state) => state.note.timestamp);
+    const timestamp = value.timestamp;
     const [title, setTitle] = [value.title, value.setTitle];
     const [content, setContent] = [value.content, value.setContent];
     const [saveBtn, setSaveBtn] = [value.saveBtn, value.setSaveBtn];

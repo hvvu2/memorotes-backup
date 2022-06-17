@@ -1,5 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&family=Noto+Sans+TC&display=swap');
 
+// RWD
+@mixin w360-768 {
+    @media screen and (min-width: 360px) and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin w769-1100 {
+    @media screen and (min-width: 769px) and (max-width: 1100px) {
+        @content;
+    }
+}
+
+@mixin w1101-1440 {
+    @media screen and (min-width: 1101px) and (max-width: 1440px) {
+        @content;
+    }
+}
+
+@mixin w1441-1680 {
+    @media screen and (min-width: 1441px) and (max-width: 1680px) {
+        @content;
+    }
+}
+
+@mixin w1681-1920 {
+    @media screen and (min-width: 1681px) and (max-width: 1920px) {
+        @content;
+    }
+}
+
 // Colors
 $main: #78574C;
 $sub: #AE9288;
@@ -66,25 +97,37 @@ i {
 }
 
 .divider {
-    width: 96%;
+    width: 90%;
     height: 2px;
     border-radius: 5px;
     background-color: $base;
 }
 
 .xl {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
+
+    @include w360-768() {
+        transform: scale(0.9);
+    }
 }
 
 .l {
     width: 600px;
     height: 400px;
+
+    @include w360-768() {
+        transform: scale(0.55);
+    }
 }
 
 .m {
     width: 500px;
     height: 350px;
+
+    @include w360-768() {
+        transform: scale(0.9);
+    }
 }
 
 .s {
@@ -143,6 +186,10 @@ i {
             line-height: 50px;
             color: $main;
 
+            @include w360-768() {
+                transform: scale(0.9);
+            }
+
             &.lh-s {
                 line-height: 30px;
             }
@@ -164,6 +211,11 @@ i {
             bottom: 15px;
             font-size: 18px;
             color: $main;
+
+            @include w360-768() {
+                right: 45px;
+                transform: scale(0.9);
+            }
         }
 
         &__btn {
@@ -379,53 +431,63 @@ i {
             flex-direction: column;
             position: absolute;
             z-index: 1;
-            width: 480px;
-            height: 420px;
+            width: 400px;
+            height: auto;
             border-radius: 5px;
+
+            @include w360-768() {
+                transform: scale(0.9);
+            }
 
             &__img-wrapper {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 position: relative;
-                width: 160px;
-                height: 160px;
+                width: 110px;
+                height: 110px;
                 margin-bottom: 20px;
                 border: 3px dashed $main;
-                border-radius: 5px;
+                border-radius: 50%;
             }
 
             &__img {
-                width: 150px;
-                height: 150px;
-                border-radius: 5px;
-                background-color: $main;
-            }
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-color: $base;
+                box-shadow: 0 0 10px 2px $deep-shadow;
 
-            &__upload {
-                position: absolute;
-                width: 150px;
-                height: 150px;
-                opacity: 0;
-                cursor: pointer;
+                & i {
+                    color: $main;
+                    font-size: 75px;
+                    transition: 0.3s;
+                }
             }
 
             &__wrapper {
                 display: flex;
                 position: relative;
+                height: 30px;
                 margin-bottom: 15px;
             }
 
             &__title {
-                height: 30px;
+                height: 100%;
                 font-size: 30px;
                 color: $main;
             }
 
-            &__sub-title {
-                height: 20px;
+            &__txt {
+                padding: 0 20px;
+                height: 90px;
                 font-size: 20px;
-                margin-bottom: 8px;
+                line-height: 30px;
                 color: $main;
             }
 
@@ -437,16 +499,69 @@ i {
                 height: 30px;
                 font-size: 20px;
                 margin-left: 10px;
+
+                & i {
+                    transition: 0.1s;
+
+                    &:hover {
+                        color: $base;
+                        transition: 0.1s;
+                    }
+                }
+            }
+
+            &__input-wrapper {
+                display: flex;
+                align-items: center;
+                position: relative;
+                height: 30px;
+                margin-bottom: 15px;
+            }
+
+            &__input {
+                padding: 0 15px;
+                width: 150px;
+                height: 30px;
+                font-size: 24px;
+                margin-top: 0;
+                text-align: center;
+                color: $main;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                background-color: $base;
+            }
+
+            &__submit {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                background-color: $main;
+
+                & i {
+                    font-size: 25px;
+                    font-weight: bold;
+                    color: $sub;
+                    transition: 0.1s;
+                }
+                &:hover i {
+                    color: $base;
+                    transition: 0.1s;
+                }
             }
 
             &__lines {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-around;
+                justify-content: space-between;
                 position: absolute;
-                bottom: 10px;
+                bottom: 2px;
                 width: 100%;
-                height: 200px;
+                height: 90px;
+                pointer-events: none;
             }
 
             &__line {
@@ -465,7 +580,7 @@ i {
 
         &__title {
             font-size: 32px;
-            margin-left: 20px;
+            margin-left: 30px;
             color: $base;
             cursor: pointer;
         }
@@ -484,17 +599,27 @@ i {
         }
 
         &__btn {
-            width: 25px;
-            height: 25px;
-            font-size: 25px;
-            margin-right: 20px  ;
+            width: 30px;
+            height: 30px;
+            font-size: 30px;
+            margin-right: 30px;
 
+            @include w360-768() {
+                width: 25px;
+                height: 25px;
+                font-size: 25px;
+                margin-right: 20px;
+            }
+            
             & i {
                 font-weight: bold;
+                transition: 0.1s;
             }
 
             &:hover i {
                 color: $base;
+                transition: 0.1s;
+                transform: scale(1.1);
             }
         }
     }
@@ -510,35 +635,66 @@ i {
         width: 250px;
         height: calc(100% - 50px);
         background-color: $main;
+        transition: 0.3s;
+        transform: translateX(0);
+
+        @include w360-768() {
+            position: absolute;
+            width: 100%;
+            height: auto;
+        }
 
         .editor {
             padding: 20px;
             width: calc(100% - 40px);
             height: auto;
 
+            @include w360-768() {
+                padding: 10px;
+            }
+
             &__title {
                 font-size: 26px;
                 margin-bottom: 10px;
                 text-align: center;
                 color: $base;
+
+                @include w360-768() {
+                    font-size: 22px;
+                    margin-bottom: 5px;
+                }
             }
 
             &__sub-title {
                 font-size: 22px;
                 margin-bottom: 14px;
                 color: $base;
+
+                @include w360-768() {
+                    font-size: 18px;
+                    margin-bottom: 10px;
+                }
             }
             
             &__wrapper {
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 15px;
+
+                @include w360-768() {
+                    margin-bottom: 10px;
+                }
             }
 
             &__btn {
                 width: 20px;
                 height: 20px;
                 border-radius: 5px;
+
+                @include w360-768() {
+                    width: 30px;
+                    height: 30px;
+                }
 
                 &.active {
                     border: 2px solid $base;
@@ -577,6 +733,10 @@ i {
                     border-radius: 5px;
                     background-color: $sub;
                     border: none;
+
+                    @include w360-768() {
+                        width: 100px;
+                    }
 
                     &.active {
                         background-color: $base;
@@ -634,6 +794,11 @@ i {
                         width: 20px;
                         height: 20px;
                         border-color: $base;
+
+                        @include w360-768() {
+                            width: 30px;
+                            height: 30px;
+                        }
                     }
                 } .editor__btn:nth-child(5) {
                     background-color: #AE9288;
@@ -667,7 +832,7 @@ i {
     .display-board {
         flex-grow: 1;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         position: relative;
         height: 100%;
         background-color: $base;
@@ -676,20 +841,47 @@ i {
             display: flex;
             flex-wrap: wrap;
             align-content: flex-start;
-            padding: 20px;
-            height: 100%;
+            width: 1500px;
+            height: auto;
+            margin: 30px 0;
+            border-radius: 5px;
+            background-color: #F5DEBF;
+
+            @include w1441-1680() {
+                width: 1350px;
+            }
+
+            @include w1101-1440() {
+                width: 1050px;
+            }
+
+            @include w769-1100() {
+                width: 750px;
+            }
+
+            @include w360-768() {
+                width: 300px;
+            }
         }
 
         &__btn {
             align-self: center;
-            position: absolute;
-            bottom: 20px;
+            position: fixed;
+            bottom: 15px;
             width: 50px;
             height: 50px;
             font-size: 50px;
 
+            & i {
+                border-radius: 50%;
+                background-color: $base;
+                transition: 0.1s;
+            }
+
             &:hover i {
                 color: $sub;
+                transition: 0.1s;
+                transform: scale(1.1);
             }
         }
 
@@ -843,7 +1035,7 @@ i {
 
             &__line.dashed {
                 height: 1px;
-                background: repeating-linear-gradient(to right, $deep-shadow 0, $deep-shadow 6px,transparent 8px,transparent 10px);
+                background: repeating-linear-gradient(to right, $deep-shadow 0, $deep-shadow 2px,transparent 4px,transparent 4px);
             }
         }
 
@@ -858,6 +1050,10 @@ i {
             border-radius: 5px;
             background: linear-gradient(-45deg, transparent 2em, $note-yellow 0);
 
+            @include w360-768() {
+                transform: scale(0.8);
+            }
+
             &__tag {
                 position: absolute;
                 top: 25px;
@@ -867,6 +1063,10 @@ i {
                 border-top-right-radius: 5px;
                 border-bottom-right-radius: 5px;
                 pointer-events: none;
+
+                @include w360-768() {
+                    transform: scale(0.8);
+                }
 
                 &::before {
                     content: '';
@@ -957,11 +1157,15 @@ i {
                 position: absolute;
                 top: 70px;
                 padding: 0 10px;
-                width: 540px;
+                width: 90%;
                 height: 25px;
                 font-size: 22px;
                 letter-spacing: 1px;
                 background: transparent;
+
+                @include w360-768() {
+                    padding: 0;
+                }
 
                 &::placeholder {
                     color: $sub-txt;
@@ -973,13 +1177,17 @@ i {
                 position: absolute;
                 top: 100px;
                 padding: 0 10px;
-                width: 540px;
+                width: 90%;
                 height: 350px;
                 font-size: 18px;
                 line-height: 25px;
                 white-space: pre-wrap;
                 background: transparent;
                 overflow: hidden;
+
+                @include w360-768() {
+                    padding: 0;
+                }
 
                 &::placeholder {
                     color: $sub-txt;
@@ -993,6 +1201,8 @@ i {
                 width: 50px;
                 height: 50px;
                 font-size: 50px;
+                border-radius: 50%;
+                background-color: $base;
 
                 &:hover i {
                     color: $sub;
@@ -1003,9 +1213,13 @@ i {
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                width: 40px;
-                height: 40px;
                 font-size: 40px;
+
+                @include w360-768() {
+                    top: 15px;
+                    right: 15px;
+                    font-size: 30px;
+                }
 
                 &:hover i {
                     color: $sub;
@@ -1017,6 +1231,12 @@ i {
                 top: 20px;
                 right: 20px;
                 font-size: 40px;
+
+                @include w360-768() {
+                    top: 15px;
+                    right: 15px;
+                    font-size: 30px;
+                }
             }
 
             &__close, &__delete {
@@ -1059,7 +1279,7 @@ i {
                 justify-content: space-between;
                 position: absolute;
                 top: 98px;
-                width: 560px;
+                width: calc(100% - 40px);
                 height: 350px;
                 pointer-events: none;
             }

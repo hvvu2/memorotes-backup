@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { showAlert } from '../../features/popupSlice.js'
 import { hideCreateUI, onCreate, createNote } from '../../features/noteSlice.js';
@@ -46,7 +46,7 @@ function Lines(props) {
 function CreateNote(props) {
     const dispatch = useDispatch();
     const value = useContext(Context);
-    const onCreateTimestamp = useSelector((state) => state.note.onCreateTimestamp);
+    const timestamp = value.timestamp;
     const [title, setTitle] = [value.title, value.setTitle];
     const [content, setContent] = [value.content, value.setContent];
     const [saveBtn, setSaveBtn] = [value.saveBtn, value.setSaveBtn];
@@ -54,7 +54,7 @@ function CreateNote(props) {
     const isLogged = value.isLogged;
     const uid = value.uid;
     const date = value.date;
-    const timestamp = value.timestamp;
+    const onCreateTimestamp = useSelector((state) => state.note.onCreateTimestamp);
     const noteColor = useSelector((state) => state.panel.noteColor);
     const noteStyle = useSelector((state) => state.panel.noteStyle);
     const noteTag = useSelector((state) => state.panel.noteTag);
@@ -156,7 +156,7 @@ function CreateNote(props) {
                     <Tag toggle={noteTag} />
                     <h1 className='note__date' style={dateInlineStyle}>{date}</h1>
                     <input className='note__title' style={titleInlineStyle} type='text' maxLength={40} placeholder='Title' onChange={(e) => setTitle(e.target.value)} />
-                    <textarea className='note__txt' style={contentInlineStyle} row={17} wrap='hard' placeholder='Type something here...' onChange={(e) => setContent(e.target.value)} />
+                    <textarea className='note__txt' style={contentInlineStyle} row={15} wrap='hard' placeholder='Type something here...' onChange={(e) => setContent(e.target.value)} />
                     <SaveBtn toggle={saveBtn} />
                     <button className='note__close' type='button' onClick={(onClose)}><i className='bx bx-x'></i></button>
                     <Lines toggle={noteStyle} />

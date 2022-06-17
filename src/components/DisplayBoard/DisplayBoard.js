@@ -10,6 +10,12 @@ import ReadNote from './ReadNote.js';
 import UpdateNote from './UpdateNote.js';
 import DeleteNote from './DeleteNote.js';
 
+const datetime = new Date();
+const year = datetime.getFullYear().toString();
+const month = (datetime.getMonth() + 1).toString().padStart(2, '0');
+const date = datetime.getDate().toString().padStart(2, '0');
+const currentDate = parseInt(year + month + date);
+
 function CreateBtn(props) {
     const dispatch = useDispatch();
 
@@ -47,6 +53,7 @@ function Lines(props) {
             <div className={className}></div>
             <div className={className}></div>
             <div className={className}></div>
+            <div className={className}></div>
         </div>  
         );  
     }
@@ -57,7 +64,6 @@ function DisplayBoard() {
     const uid = useSelector((state) => state.gate.uid);
     const isLogged = useSelector((state) => state.gate.isLogged);
     const date = useSelector((state) => state.note.date);
-    const timestamp = useSelector((state) => state.note.timestamp);
     const createBtn = useSelector((state) => state.note.createBtn);
     const createToggle = useSelector((state) => state.note.createToggle);
     const readToggle = useSelector((state) => state.note.readToggle);
@@ -70,6 +76,7 @@ function DisplayBoard() {
     const [content, setContent] = useState('');
     const [saveBtn, setSaveBtn] = useState(false);
     const [quota, setQuota] = useState(true);
+    const [timestamp, setTimestamp] = useState(currentDate);
 
     useEffect(() => {
         if (isLogged) {
@@ -78,7 +85,15 @@ function DisplayBoard() {
         } else {
             setQuota(true);
         }
-    }, [isLogged]);
+        timer();
+        clearInterval(timer);
+
+        function timer() {
+            setInterval(() => {
+                setTimestamp(currentDate);
+            }, 1000);
+        }
+    }, [isLogged, timestamp]);
 
     async function checkQuota() {
         const docId = timestamp.toString();
@@ -154,7 +169,8 @@ function DisplayBoard() {
                 setSaveBtn={setSaveBtn}
             />
             <Context.Provider value={{
-                title: title, 
+                timestamp: timestamp,
+                title: title,
                 setTitle: setTitle,
                 content: content,
                 setContent: setContent,
@@ -165,7 +181,6 @@ function DisplayBoard() {
                 note: note,
                 uid: uid,
                 date: date,
-                timestamp: timestamp
             }}>
                 <CreateNote toggle={createToggle} />
                 <ReadNote toggle={readToggle} />
