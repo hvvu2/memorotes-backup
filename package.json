@@ -2,7 +2,7 @@
   "name": "memorotes",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --open"
@@ -33,7 +33,11 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
+    "@reduxjs/toolkit": "^1.8.1",
+    "firebase": "^9.8.1",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-redux": "^8.0.1",
+    "redux": "^4.2.0"
   }
 }

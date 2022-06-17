@@ -17,20 +17,38 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-    color: black;
     text-decoration: none;
 }
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-input{
+button{
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+}
+i{
+	justify-self: center;
+	align-self: center;
+}
+input, textarea, input:focus, textarea:focus{
     padding: 0;
     margin: 0;
+	margin-top: -1.5px;
     border: none;
     outline: none;
 }
-input:focus::placeholder{
+textarea:focus{
+	margin-top: 0;
+}
+textarea{
+	margin-top: 0;
+	resize: none;
+}
+input:focus::placeholder, textarea:focus::placeholder{
     color: transparent;
 }
 body {
