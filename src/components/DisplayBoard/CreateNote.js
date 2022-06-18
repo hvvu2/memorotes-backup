@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { showAlert } from '../../features/popupSlice.js'
 import { hideCreateUI, onCreate, createNote } from '../../features/noteSlice.js';
