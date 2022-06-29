@@ -13,16 +13,16 @@ Memorotes is a sticky notes style website that allows users to record their memo
 ## React
 
 ## React Hooks
-#### useState
-#### useEffect
-#### useContext
-#### useRef
+#### useState: to store local states, such as note title, content, timestamp, etc.
+#### useEffect: to execute conditional statements or codes, such as updating time, after rendering.
+#### useContext: to pass the local states to the sub components.
+#### useRef: to get the certain react-dom elements.
 
 ## Redux Toolkit
-#### slice
-#### async thunk
-#### useDispatch
-#### useSelector
+#### slice: to manage global states, such as UI and popups toggles, actions and reducers, so as to simplify the project structure.
+#### thunk: to handle async actions and simplify the main components.
+#### useDispatch: to dispatch an action to modify the global states.
+#### useSelector: to get the global states.
 
 # Backend Techniques
 ## Firebase Hosting
