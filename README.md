@@ -9,6 +9,11 @@ Memorotes is a sticky note style website that allows users to record their memor
 ＊ Test Password: 000000
 
 # Features
+1. A single-page application to enhance the user experience by using AJAX and many popups.
+2. Users can log in/sign up to access all the services, or try some basic features as a guest.
+3. Notes are time-limited to be edited or deleted, once after the day, the contents will be stored permanently.
+4. Users can expand the style panel to customize the note's style, color, align, text color, etc.
+5. The member center allows users to check their statics and change their names.
 
 # Structure
 ![memorotes drawio](https://user-images.githubusercontent.com/19690558/177708468-7e6ee8be-499d-4874-a753-0eef3128e808.png)
@@ -19,16 +24,16 @@ Memorotes is a sticky note style website that allows users to record their memor
 ## CSS (SCSS)
 
 ## React (React Hooks)
-#### useState: to store local states, such as note title, content, timestamp, etc.
-#### useEffect: to execute conditional statements or codes, such as updating time, after rendering.
-#### useContext: to pass the local states to the sub components.
-#### useRef: to get the certain react-dom elements.
+#### useState: Store local states, such as note title, content, timestamp, etc.
+#### useEffect: Execute conditional statements or codes, such as updating time, after rendering.
+#### useContext: Pass the local states to the sub components.
+#### useRef: Get the certain react-dom elements.
 
 ## Redux (Redux Toolkit)
-#### slice: to manage global states, such as UI and popups toggles, actions and reducers, so as to simplify the project structure.
-#### thunk: to handle async actions and simplify the main components.
-#### useDispatch: to dispatch an action to modify the global states.
-#### useSelector: to get the global states.
+#### slice: Manage global states, such as UI and popups toggles, actions and reducers, so as to simplify the project structure.
+#### thunk: Handle async actions and simplify the main components.
+#### useDispatch: Dispatch an action to modify the global states.
+#### useSelector: Get the global states.
 
 ## AJAX
 
@@ -36,7 +41,10 @@ Memorotes is a sticky note style website that allows users to record their memor
 ***
 # Backend Techniques
 ## Firebase Hosting
+#### Deploy the website.
 
 ## Firebase Authentication
+#### Build a member system.
 
 ## Firestore
+#### Store users' information, notes and their property values.
