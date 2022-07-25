@@ -2,7 +2,7 @@
 ### https://memorotes.web.app/
 
 # Description
-Memorotes is a sticky note style website that allows users to record their memorable moments or vent their feelings by writing a note everyday, but the difference from other note-taking websites is that the note can't be edited or deleted after the day anymore, and then it becomes a "memory note".
+Memorotes is a sticky note style website that allows users to record their memorable moments or vent their feelings by writing a note every day, but the difference from other note-taking websites is that the note can't be edited or deleted after the day anymore, and then it becomes a "memory note".
 
 ＊ Test Username: guest@guest.gst
 <br/>
