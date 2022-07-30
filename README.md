@@ -41,10 +41,7 @@ Memorotes is a sticky note style website that allows users to record their memor
 ***
 # Backend Techniques
 ## Firebase Hosting
-#### Deploy the website.
 
 ## Firebase Authentication
-#### Help build the member system.
 
 ## Firestore
-#### Store users' information, notes and their property values, etc.
