@@ -57,9 +57,9 @@ export const createNote = createAsyncThunk('note/createNote', async (data) => {
 });
 
 export const updateNote = createAsyncThunk('note/updateNote', async (data) => {
-    const ref = doc(db, 'users', uid, 'notes', docId);
     const uid = data.uid;
     const docId = data.note.timestamp.toString();
+    const ref = doc(db, 'users', uid, 'notes', docId);
     const newNote = data.newNote;
     const newTitle = newNote.title.trim();
     const newContent = newNote.content.trim();

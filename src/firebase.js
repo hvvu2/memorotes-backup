@@ -10,7 +10,6 @@ import {
     doc,
     setDoc
 } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
 
 // Firebase Init
 const firebaseConfig = {
@@ -26,7 +25,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 // Firebase Auth
 const registerWithEmailAndPassword = async (name, email, pwd) => {
@@ -62,7 +60,6 @@ const logOut = () => {
 export {
     auth,
     db,
-    storage,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,
     logOut
